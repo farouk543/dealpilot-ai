@@ -37,8 +37,9 @@ Utiliser le cas synthétique `case_01_normal_complete` (ou un dossier équivalen
 > interface technique générique."
 
 Optionnel si le temps le permet : basculer rapidement sur le rôle **Promoteur/Citoyen**, montrer la
-faisabilité de terrain avec la vraie zone PLU récupérée depuis une adresse, et un rendu intérieur
-généré par IA.
+faisabilité de terrain avec la vraie zone PLU récupérée depuis une adresse, générer la **vue à 360°**
+photoréaliste du bâtiment (8 angles, IA, glisser pour tourner), puis un rendu intérieur cohérent
+visuellement avec cette façade (même "identité" de bâtiment grâce à un seed partagé).
 
 ## 4. Évaluation et gestion des pannes (3:30 – 4:30)
 
@@ -67,7 +68,10 @@ généré par IA.
 
 - Préparer les conteneurs à l'avance (`docker compose up -d`, attendre que tout soit `healthy`) pour
   ne pas perdre de temps de démo sur un démarrage à froid.
-- Le rendu SDXL prend ~30-60s — si démontré, le lancer puis continuer à parler pendant la génération
-  plutôt que d'attendre en silence.
+- Le rendu SDXL (intérieur/façade unique) prend ~30-60s — si démontré, le lancer puis continuer à
+  parler pendant la génération plutôt que d'attendre en silence.
+- La **vue à 360°** (8 angles) prend ~5 minutes — trop long pour la démo en direct. La **pré-générer
+  avant l'enregistrement** pour le même bien/style que celui présenté, et juste montrer/manipuler le
+  résultat déjà prêt (glisser pour tourner) pendant la démo.
 - Avoir `docs/eval_results.md` et `docs/case_study.md` déjà ouverts dans des onglets pour les montrer
   sans chercher.

@@ -38,6 +38,13 @@ vérification qui a changé le résultat :
    une reproduction isolée du même appel — qui a réussi. La vraie cause (timing du harnais de test,
    pas un bug produit) n'a été retenue qu'après cette vérification, pour éviter de corriger du code
    qui n'était pas cassé.
+4. **Le cadrage des images de la vue 360°** : après un premier correctif de prompt jugé insuffisant à
+   l'usage (images toujours trop resserrées), l'IA a proposé un deuxième correctif — qui n'a *presque
+   rien changé*. Plutôt que d'en rester là, j'ai demandé une inspection des logs bruts du modèle, qui a
+   révélé la vraie cause : le prompt dépassait la limite de 77 tokens du tokenizer CLIP, et c'est
+   précisément la partie ajoutée par le premier correctif qui se faisait couper. Le correctif final
+   (réordonner le prompt) n'a été appliqué qu'après cette vérification par les logs, pas par simple
+   confiance dans la deuxième tentative de l'IA.
 
 ## Ce qui a été rejeté ou corrigé
 
@@ -53,6 +60,13 @@ vérification qui a changé le résultat :
   vrai investisseur n'était disponible pendant le sprint, le choix a été de documenter cette limite
   explicitement dans `docs/eval_results.md` plutôt que de laisser l'IA produire un chiffre baseline
   inventé pour combler le trou.
+- **La maquette 3D mesurable (Blender/Cycles)** — un chantier entier (portage de la géométrie,
+  animation de phases de construction, HDRI, verrou GPU inter-services) a été construit et vérifié
+  fonctionnel, puis **rejeté du parcours principal** après comparaison visuelle directe avec le rendu
+  photoréaliste SDXL déjà utilisé pour l'intérieur : la précision géométrique ne compensait pas
+  l'écart de qualité perçue pour cet usage de vente/présentation. Le code reste dans le dépôt (pas
+  supprimé, juste débranché du parcours utilisateur) plutôt que jeté, au cas où l'exactitude
+  dimensionnelle redevienne prioritaire.
 
 ## Décisions qui m'appartiennent
 
@@ -76,6 +90,11 @@ vérification qui a changé le résultat :
 - **L'arbitrage final entre profondeur technique et documentation** dans le temps restreint du
   sprint, service par service, approuvé explicitement à chaque étape plutôt que délégué à l'IA en
   bloc.
+- **Le pivot de la maquette 3D vers la vue 360° IA** — après avoir vu les deux résultats côte à côte,
+  la décision de retirer la maquette mesurable du parcours principal au profit d'un rendu
+  photoréaliste (moins précis géométriquement, mais nettement plus convaincant visuellement) a été
+  une décision produit, pas une décision technique déléguée — l'IA avait construit les deux options
+  correctement, le choix entre elles m'appartenait.
 
 ## Limite de cette collaboration
 

@@ -62,6 +62,7 @@ seront de nouveau accessibles au prochain démarrage.
 - `docs/eval_results.md` — résultats des tests d'évaluation, y compris scénarios de panne.
 - `docs/ai_collaboration_note.md` — comment ce projet a été construit avec l'assistance d'une IA.
 - `docs/iteration_plan.md` — ce qui est prévu pour la suite.
+- `docs/demo_script.md` — script de la démo vidéo de 5 minutes.
 - `RUNBOOK.md` — pour l'exploitant : variables d'environnement, pannes connues, comment déboguer.
 
 ## Licence des composants tiers
