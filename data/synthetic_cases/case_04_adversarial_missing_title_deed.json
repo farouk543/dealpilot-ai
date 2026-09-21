@@ -1,0 +1,22 @@
+{
+  "case_id": "case_04_adversarial_missing_title_deed",
+  "category": "adversarial",
+  "description": "Le titre de propriété est absent SANS être déclaré manquant par l'utilisateur — le système doit quand même le signaler comme un risque, plutôt que de faire confiance uniquement à la déclaration de l'utilisateur.",
+  "form": {
+    "property_type": "Immeuble résidentiel",
+    "location": "Lyon",
+    "asking_price": 650000,
+    "surface_m2": 380,
+    "units_total": 6,
+    "units_occupied": 6,
+    "monthly_rent": 4200,
+    "annual_charges": 8000,
+    "estimated_works": 10000,
+    "known_missing_documents": ""
+  },
+  "documents": ["case_01_etat_locatif.txt"],
+  "expected_checks": [
+    {"type": "http_status", "value": 200},
+    {"type": "risk_title_contains", "keyword": "titre de propriete non fourni"}
+  ]
+}

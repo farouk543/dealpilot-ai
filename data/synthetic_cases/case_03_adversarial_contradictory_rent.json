@@ -1,0 +1,23 @@
+{
+  "case_id": "case_03_adversarial_contradictory_rent",
+  "category": "adversarial",
+  "description": "Le formulaire déclare un loyer mensuel différent de celui indiqué dans l'état locatif fourni — le système doit garder les deux valeurs tracées, pas en choisir une silencieusement.",
+  "form": {
+    "property_type": "Immeuble résidentiel",
+    "location": "Lyon",
+    "asking_price": 650000,
+    "surface_m2": 380,
+    "units_total": 6,
+    "units_occupied": 6,
+    "monthly_rent": 5000,
+    "annual_charges": 8000,
+    "estimated_works": 10000,
+    "known_missing_documents": ""
+  },
+  "documents": ["case_03_etat_locatif_contradictoire.txt"],
+  "expected_checks": [
+    {"type": "http_status", "value": 200},
+    {"type": "field_contested", "field": "monthly_rent"},
+    {"type": "risk_title_contains", "keyword": "loyer mensuel incoherent"}
+  ]
+}

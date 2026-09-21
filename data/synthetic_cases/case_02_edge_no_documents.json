@@ -1,0 +1,24 @@
+{
+  "case_id": "case_02_edge_no_documents",
+  "category": "edge",
+  "description": "Aucun document ni photo fourni — cas limite pour vérifier que le système ne plante pas et signale correctement l'absence totale de preuves.",
+  "form": {
+    "property_type": "Maison individuelle",
+    "location": "Bordeaux",
+    "asking_price": 300000,
+    "surface_m2": 100,
+    "units_total": 1,
+    "units_occupied": 1,
+    "monthly_rent": 1200,
+    "annual_charges": 2000,
+    "estimated_works": 0,
+    "known_missing_documents": ""
+  },
+  "documents": [],
+  "expected_checks": [
+    {"type": "http_status", "value": 200},
+    {"type": "risk_severity_present", "severity": "eleve"},
+    {"type": "risk_title_contains", "keyword": "titre de propriete"},
+    {"type": "risk_title_contains", "keyword": "etat locatif"}
+  ]
+}

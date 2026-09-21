@@ -1,0 +1,512 @@
+{
+  "status": 200,
+  "result": {
+    "deal_id": "76b8c6c9-d09a-4cdd-b7b0-c3649540c645",
+    "created_at": "2026-09-21T08:45:40.619828Z",
+    "current_step": "final_file",
+    "property": {
+      "id": "450baf19-1377-444f-a3a8-e38561f74838",
+      "property_type": "Immeuble résidentiel",
+      "location": "Lyon",
+      "address": null,
+      "asking_price": {
+        "candidates": [
+          {
+            "value": 500000.0,
+            "provenance": {
+              "source_type": "user_hypothesis",
+              "reference": "user_intake_form",
+              "note": null,
+              "confidence": null
+            }
+          }
+        ],
+        "resolved": 500000.0,
+        "contested": false
+      },
+      "surface_m2": {
+        "candidates": [
+          {
+            "value": 300.0,
+            "provenance": {
+              "source_type": "user_hypothesis",
+              "reference": "user_intake_form",
+              "note": null,
+              "confidence": null
+            }
+          }
+        ],
+        "resolved": 300.0,
+        "contested": false
+      },
+      "units_total": {
+        "candidates": [
+          {
+            "value": 6,
+            "provenance": {
+              "source_type": "user_hypothesis",
+              "reference": "user_intake_form",
+              "note": null,
+              "confidence": null
+            }
+          }
+        ],
+        "resolved": 6,
+        "contested": false
+      },
+      "units_occupied": {
+        "candidates": [
+          {
+            "value": 6,
+            "provenance": {
+              "source_type": "user_hypothesis",
+              "reference": "user_intake_form",
+              "note": null,
+              "confidence": null
+            }
+          }
+        ],
+        "resolved": 6,
+        "contested": false
+      },
+      "monthly_rent": {
+        "candidates": [
+          {
+            "value": 25000.0,
+            "provenance": {
+              "source_type": "user_hypothesis",
+              "reference": "user_intake_form",
+              "note": null,
+              "confidence": null
+            }
+          }
+        ],
+        "resolved": 25000.0,
+        "contested": false
+      },
+      "annual_charges": {
+        "candidates": [
+          {
+            "value": 8000.0,
+            "provenance": {
+              "source_type": "user_hypothesis",
+              "reference": "user_intake_form",
+              "note": null,
+              "confidence": null
+            }
+          }
+        ],
+        "resolved": 8000.0,
+        "contested": false
+      },
+      "estimated_works": {
+        "candidates": [
+          {
+            "value": 10000.0,
+            "provenance": {
+              "source_type": "user_hypothesis",
+              "reference": "user_intake_form",
+              "note": null,
+              "confidence": null
+            }
+          }
+        ],
+        "resolved": 10000.0,
+        "contested": false
+      },
+      "documents_received": [],
+      "documents_missing": [
+        "titre de propriete",
+        "etat locatif"
+      ],
+      "photos_received": []
+    },
+    "document_facts": [
+      {
+        "field_name": "market_price_per_m2_median",
+        "value": "5078.12",
+        "provenance": {
+          "source_type": "external_source",
+          "reference": "DVF 2023,2022,2021 / commune(s) 69381,69382,69383,69384,69385,69386,69387,69388,69389",
+          "note": "24794 comparables retenus, 3304 ecartes (prix/m2 hors bornes plausibles)",
+          "confidence": null
+        }
+      },
+      {
+        "field_name": "market_value_low",
+        "value": "1235491.5",
+        "provenance": {
+          "source_type": "external_source",
+          "reference": "DVF 2023,2022,2021 / commune(s) 69381,69382,69383,69384,69385,69386,69387,69388,69389",
+          "note": "24794 comparables retenus, 3304 ecartes (prix/m2 hors bornes plausibles)",
+          "confidence": null
+        }
+      },
+      {
+        "field_name": "market_value_median",
+        "value": "1523436.0",
+        "provenance": {
+          "source_type": "external_source",
+          "reference": "DVF 2023,2022,2021 / commune(s) 69381,69382,69383,69384,69385,69386,69387,69388,69389",
+          "note": "24794 comparables retenus, 3304 ecartes (prix/m2 hors bornes plausibles)",
+          "confidence": null
+        }
+      },
+      {
+        "field_name": "market_value_high",
+        "value": "1808334.0",
+        "provenance": {
+          "source_type": "external_source",
+          "reference": "DVF 2023,2022,2021 / commune(s) 69381,69382,69383,69384,69385,69386,69387,69388,69389",
+          "note": "24794 comparables retenus, 3304 ecartes (prix/m2 hors bornes plausibles)",
+          "confidence": null
+        }
+      },
+      {
+        "field_name": "market_rationale",
+        "value": "Comparables issus de ventes unitaires (appartements/maisons) DVF, extrapoles au prorata de la surface totale du bien : n'equivaut pas a une vente d'immeuble entier et ne tient pas compte d'une decote/surcote liee a la vente en bloc.",
+        "provenance": {
+          "source_type": "external_source",
+          "reference": "DVF 2023,2022,2021 / commune(s) 69381,69382,69383,69384,69385,69386,69387,69388,69389",
+          "note": null,
+          "confidence": null
+        }
+      },
+      {
+        "field_name": "location_latitude",
+        "value": "45.758",
+        "provenance": {
+          "source_type": "external_source",
+          "reference": "BAN/geo.api.gouv.fr",
+          "note": null,
+          "confidence": null
+        }
+      },
+      {
+        "field_name": "location_longitude",
+        "value": "4.8351",
+        "provenance": {
+          "source_type": "external_source",
+          "reference": "BAN/geo.api.gouv.fr",
+          "note": null,
+          "confidence": null
+        }
+      },
+      {
+        "field_name": "location_count:commerces",
+        "value": "477",
+        "provenance": {
+          "source_type": "external_source",
+          "reference": "OpenStreetMap/Overpass, rayon 400m",
+          "note": null,
+          "confidence": null
+        }
+      },
+      {
+        "field_name": "location_count:restauration",
+        "value": "89",
+        "provenance": {
+          "source_type": "external_source",
+          "reference": "OpenStreetMap/Overpass, rayon 400m",
+          "note": null,
+          "confidence": null
+        }
+      },
+      {
+        "field_name": "location_count:sante",
+        "value": "5",
+        "provenance": {
+          "source_type": "external_source",
+          "reference": "OpenStreetMap/Overpass, rayon 400m",
+          "note": null,
+          "confidence": null
+        }
+      },
+      {
+        "field_name": "location_count:education",
+        "value": "2",
+        "provenance": {
+          "source_type": "external_source",
+          "reference": "OpenStreetMap/Overpass, rayon 400m",
+          "note": null,
+          "confidence": null
+        }
+      },
+      {
+        "field_name": "location_count:services_bancaires",
+        "value": "8",
+        "provenance": {
+          "source_type": "external_source",
+          "reference": "OpenStreetMap/Overpass, rayon 400m",
+          "note": null,
+          "confidence": null
+        }
+      },
+      {
+        "field_name": "location_count:transport",
+        "value": "23",
+        "provenance": {
+          "source_type": "external_source",
+          "reference": "OpenStreetMap/Overpass, rayon 400m",
+          "note": null,
+          "confidence": null
+        }
+      },
+      {
+        "field_name": "location_vibrancy_index",
+        "value": "100",
+        "provenance": {
+          "source_type": "external_source",
+          "reference": "OpenStreetMap/Overpass, rayon 400m",
+          "note": null,
+          "confidence": null
+        }
+      },
+      {
+        "field_name": "location_context",
+        "value": "Le secteur étudié autour de l’immeuble résidentiel à Lyon présente une très forte densité commerciale (477 commerces) et une offre de restauration importante (89 établissements) dans un rayon de 400 m. Pour un investisseur locatif, cela signifie un quartier très attractif pour des locataires recherchant la proximité des services du quotidien, des restaurants et des boutiques, typiquement des jeunes actifs, des couples sans enfants et des seniors appréciant le cadre urbain piéton. La présence de 23 arrêts ou stations de transport (bus, métro, tram) assure une bonne desserte, même si le nombre reste modéré comparé à la densité commerciale. En revanche, le faible nombre d’établissements d’éducation (2) et de santé (5) indique que le quartier n’est pas particulièrement orienté familles avec enfants ou patients recherchant de multiples options de soins, ce qui limite le profil de locataires à ceux qui n’ont pas besoin d’une proximité immédiate d’écoles ou de structures médicales.",
+        "provenance": {
+          "source_type": "external_source",
+          "reference": "Analyse LLM sur donnees OSM",
+          "note": null,
+          "confidence": null
+        }
+      },
+      {
+        "field_name": "location_opportunity:commercial",
+        "value": "Créer un commerce de santé (pharmacie, cabinet dentaire ou centre de soins) pour répondre à la pénurie relative (seulement 5 établissements de santé pour 477 commerces).",
+        "provenance": {
+          "source_type": "external_source",
+          "reference": "Analyse LLM sur donnees OSM",
+          "note": null,
+          "confidence": 0.82
+        }
+      },
+      {
+        "field_name": "location_opportunity:commercial",
+        "value": "Développer un espace de coworking ou de services aux professionnels, profitant du flux important de travailleurs et de la forte offre de restauration pour les pauses.",
+        "provenance": {
+          "source_type": "external_source",
+          "reference": "Analyse LLM sur donnees OSM",
+          "note": null,
+          "confidence": 0.65
+        }
+      },
+      {
+        "field_name": "location_risk",
+        "value": "Sur‑saturation commerciale : la très haute densité de commerces peut limiter la rentabilité d’un nouveau commerce de détail et créer une concurrence forte.",
+        "provenance": {
+          "source_type": "external_source",
+          "reference": "Analyse LLM sur donnees OSM",
+          "note": "severity:moyen",
+          "confidence": null
+        }
+      },
+      {
+        "field_name": "location_risk",
+        "value": "Manque d’infrastructures éducatives : peu d’écoles (2) peut décourager les familles avec enfants de s’installer dans le quartier.",
+        "provenance": {
+          "source_type": "external_source",
+          "reference": "Analyse LLM sur donnees OSM",
+          "note": "severity:faible",
+          "confidence": null
+        }
+      },
+      {
+        "field_name": "location_risk",
+        "value": "Bruit et activité nocturne liés à la forte offre de restauration (89 établissements) pouvant affecter le confort des résidents.",
+        "provenance": {
+          "source_type": "external_source",
+          "reference": "Analyse LLM sur donnees OSM",
+          "note": "severity:moyen",
+          "confidence": null
+        }
+      }
+    ],
+    "financing_assumptions": {
+      "down_payment_pct": 20.0,
+      "interest_rate_pct": 4.0,
+      "loan_term_years": 20,
+      "vacancy_rate_pct": 5.0,
+      "exit_cap_rate_pct": null,
+      "holding_period_years": 10,
+      "target_cap_rate_pct": 6.0
+    },
+    "underwriting": {
+      "assumptions": {
+        "down_payment_pct": 20.0,
+        "interest_rate_pct": 4.0,
+        "loan_term_years": 20,
+        "vacancy_rate_pct": 5.0,
+        "exit_cap_rate_pct": null,
+        "holding_period_years": 10,
+        "target_cap_rate_pct": 6.0
+      },
+      "scenarios": [
+        {
+          "name": "base",
+          "gross_annual_rent": 300000.0,
+          "vacancy_loss": 15000.0,
+          "effective_gross_income": 285000.0,
+          "operating_expenses": 8000.0,
+          "noi": 277000.0,
+          "cap_rate_pct": 55.4,
+          "annual_debt_service": 29087.06,
+          "cash_flow_before_tax": 247912.94,
+          "cash_on_cash_pct": 225.375,
+          "dscr": 9.523,
+          "exit_value": 500000.0,
+          "remaining_loan_balance_at_exit": 239411.13,
+          "irr_pct": 225.378
+        },
+        {
+          "name": "baisse",
+          "gross_annual_rent": 270000.0,
+          "vacancy_loss": 27000.0,
+          "effective_gross_income": 243000.0,
+          "operating_expenses": 8800.0,
+          "noi": 234200.0,
+          "cap_rate_pct": 46.84,
+          "annual_debt_service": 31677.88,
+          "cash_flow_before_tax": 202522.12,
+          "cash_on_cash_pct": 184.111,
+          "dscr": 7.393,
+          "exit_value": 494719.05,
+          "remaining_loan_balance_at_exit": 248886.07,
+          "irr_pct": 184.118
+        },
+        {
+          "name": "hausse",
+          "gross_annual_rent": 315000.0,
+          "vacancy_loss": 9450.0,
+          "effective_gross_income": 305550.0,
+          "operating_expenses": 7600.0,
+          "noi": 297950.0,
+          "cap_rate_pct": 59.59,
+          "annual_debt_service": 27838.07,
+          "cash_flow_before_tax": 270111.93,
+          "cash_on_cash_pct": 245.556,
+          "dscr": 10.703,
+          "exit_value": 504230.83,
+          "remaining_loan_balance_at_exit": 234597.62,
+          "irr_pct": 245.558
+        }
+      ],
+      "breakeven": {
+        "max_rent_drop_pct": 86.99,
+        "max_vacancy_rate_pct": 87.64,
+        "max_charges_increase_pct": 3098.91,
+        "max_interest_rate_pct": 30.0
+      }
+    },
+    "risk_register": {
+      "risks": [
+        {
+          "category": "documentaire",
+          "title": "Document manquant : titre de propriete",
+          "severity": "moyen",
+          "evidence": "Signale comme manquant lors de l'integration du dossier.",
+          "impact": "Bloque la verification de certains risques ou hypotheses tant que le document n'est pas fourni.",
+          "owner": "investisseur",
+          "next_action": "Demander 'titre de propriete' au vendeur avant la validation de l'offre.",
+          "source_reference": "documents_missing"
+        },
+        {
+          "category": "documentaire",
+          "title": "Document manquant : etat locatif",
+          "severity": "moyen",
+          "evidence": "Signale comme manquant lors de l'integration du dossier.",
+          "impact": "Bloque la verification de certains risques ou hypotheses tant que le document n'est pas fourni.",
+          "owner": "investisseur",
+          "next_action": "Demander 'etat locatif' au vendeur avant la validation de l'offre.",
+          "source_reference": "documents_missing"
+        },
+        {
+          "category": "marche",
+          "title": "Risque lie a l'emplacement",
+          "severity": "moyen",
+          "evidence": "Sur‑saturation commerciale : la très haute densité de commerces peut limiter la rentabilité d’un nouveau commerce de détail et créer une concurrence forte.",
+          "impact": "Peut affecter l'attractivite locative ou la valorisation du bien.",
+          "owner": "investisseur",
+          "next_action": "Prendre en compte ce facteur d'emplacement dans la decision finale.",
+          "source_reference": "Analyse LLM sur donnees OSM"
+        },
+        {
+          "category": "marche",
+          "title": "Risque lie a l'emplacement",
+          "severity": "faible",
+          "evidence": "Manque d’infrastructures éducatives : peu d’écoles (2) peut décourager les familles avec enfants de s’installer dans le quartier.",
+          "impact": "Peut affecter l'attractivite locative ou la valorisation du bien.",
+          "owner": "investisseur",
+          "next_action": "Prendre en compte ce facteur d'emplacement dans la decision finale.",
+          "source_reference": "Analyse LLM sur donnees OSM"
+        },
+        {
+          "category": "marche",
+          "title": "Risque lie a l'emplacement",
+          "severity": "moyen",
+          "evidence": "Bruit et activité nocturne liés à la forte offre de restauration (89 établissements) pouvant affecter le confort des résidents.",
+          "impact": "Peut affecter l'attractivite locative ou la valorisation du bien.",
+          "owner": "investisseur",
+          "next_action": "Prendre en compte ce facteur d'emplacement dans la decision finale.",
+          "source_reference": "Analyse LLM sur donnees OSM"
+        }
+      ]
+    },
+    "offer": {
+      "target_price": 500000.0,
+      "max_price": 4616666.67,
+      "stress_cap_price": 3903333.33,
+      "target_cap_rate_pct": 6.0,
+      "conditions": [
+        "Aucune condition suspensive critique identifiee a ce stade ; revalider avant signature."
+      ],
+      "loi_draft": "LETTRE D'INTENTION NON CONTRAIGNANTE (PROJET — A VALIDER PAR L'UTILISATEUR AVANT ENVOI)\n\nBien : Immeuble résidentiel — Lyon\nPrix propose (indicatif) : 500 000 EUR\n\nCette lettre exprime un interet non contraignant pour l'acquisition du bien ci-dessus,\nsous reserve des conditions suivantes et d'une due diligence complete :\n\n- Aucune condition suspensive critique identifiee a ce stade ; revalider avant signature.\n\nCe document est un projet automatiquement genere. Il ne constitue ni une offre ferme,\nni un engagement contractuel, et doit etre revu et valide par l'investisseur (et, le cas\necheant, son conseil) avant toute transmission au vendeur.\n",
+      "rationale": "Prix maximum = NOI de base (277000.0) / taux de capitalisation cible (6.0%). Valeur de marche mediane (DVF) = 1523436.0. Prix cible = min(valeur de marche, prix maximum), plafonne par le prix demande (500000.0). Plafond en scenario de stress = NOI du scenario 'baisse' / meme taux de capitalisation cible."
+    },
+    "due_diligence": {
+      "tasks": [
+        {
+          "task_type": "document_a_demander",
+          "description": "Demander 'titre de propriete' au vendeur avant la validation de l'offre.",
+          "status": "ouvert",
+          "severity_driver": "moyen",
+          "linked_risk_title": "Document manquant : titre de propriete"
+        },
+        {
+          "task_type": "document_a_demander",
+          "description": "Demander 'etat locatif' au vendeur avant la validation de l'offre.",
+          "status": "ouvert",
+          "severity_driver": "moyen",
+          "linked_risk_title": "Document manquant : etat locatif"
+        },
+        {
+          "task_type": "question_ouverte",
+          "description": "Prendre en compte ce facteur d'emplacement dans la decision finale.",
+          "status": "ouvert",
+          "severity_driver": "moyen",
+          "linked_risk_title": "Risque lie a l'emplacement"
+        },
+        {
+          "task_type": "question_ouverte",
+          "description": "Prendre en compte ce facteur d'emplacement dans la decision finale.",
+          "status": "ouvert",
+          "severity_driver": "faible",
+          "linked_risk_title": "Risque lie a l'emplacement"
+        },
+        {
+          "task_type": "question_ouverte",
+          "description": "Prendre en compte ce facteur d'emplacement dans la decision finale.",
+          "status": "ouvert",
+          "severity_driver": "moyen",
+          "linked_risk_title": "Risque lie a l'emplacement"
+        }
+      ],
+      "unresolved_high_risk_tasks": 0,
+      "decision_ready": true,
+      "audit_trail_note": "5 tache(s) de due diligence generee(s) a partir de 5 risque(s) identifie(s). Chaque tache reste reliee au risque (et donc a la source) qui l'a declenchee via linked_risk_title, formant la piste d'audit de l'annonce a la decision."
+    },
+    "pending_approval": null,
+    "approval_history": []
+  }
+}

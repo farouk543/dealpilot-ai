@@ -1,0 +1,23 @@
+{
+  "case_id": "case_05_adversarial_broken_listing_url",
+  "category": "adversarial",
+  "description": "URL d'annonce cassée/fictive — vérifie que le système ne tente jamais de la récupérer en direct (non-goal explicite : pas de scraping live) et ne plante pas dessus.",
+  "form": {
+    "property_type": "Immeuble résidentiel",
+    "location": "Lyon",
+    "listing_url": "https://annonce-immobiliere-inexistante-9382.fake/bien/000",
+    "asking_price": 650000,
+    "surface_m2": 380,
+    "units_total": 6,
+    "units_occupied": 6,
+    "monthly_rent": 4200,
+    "annual_charges": 8000,
+    "estimated_works": 10000,
+    "known_missing_documents": "titre de propriete, etat locatif"
+  },
+  "documents": [],
+  "expected_checks": [
+    {"type": "http_status", "value": 200},
+    {"type": "no_crash"}
+  ]
+}

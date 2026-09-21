@@ -1,0 +1,24 @@
+{
+  "case_id": "case_01_normal_complete",
+  "category": "normal",
+  "description": "Dossier complet et cohérent, cas nominal (baseline heureux).",
+  "form": {
+    "property_type": "Immeuble résidentiel",
+    "location": "Lyon",
+    "asking_price": 650000,
+    "surface_m2": 380,
+    "units_total": 6,
+    "units_occupied": 6,
+    "monthly_rent": 4200,
+    "annual_charges": 8000,
+    "estimated_works": 10000,
+    "known_missing_documents": ""
+  },
+  "documents": ["case_01_etat_locatif.txt", "case_01_titre_de_propriete.txt"],
+  "expected_checks": [
+    {"type": "http_status", "value": 200},
+    {"type": "field_not_contested", "field": "monthly_rent"},
+    {"type": "underwriting_present"},
+    {"type": "no_high_risk_missing_titre"}
+  ]
+}

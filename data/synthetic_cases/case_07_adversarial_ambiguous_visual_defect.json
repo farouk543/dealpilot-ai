@@ -1,0 +1,23 @@
+{
+  "case_id": "case_07_adversarial_ambiguous_visual_defect",
+  "category": "adversarial",
+  "description": "Photo fournie pour l'analyse visuelle — vérifie que l'analyse produit un score de confiance et ne certifie jamais un état structurel, quel que soit le contenu réel de l'image (l'assertion porte sur le comportement du système, pas sur un verdict visuel forcé).",
+  "form": {
+    "property_type": "Immeuble résidentiel",
+    "location": "Lyon",
+    "asking_price": 650000,
+    "surface_m2": 380,
+    "units_total": 6,
+    "units_occupied": 6,
+    "monthly_rent": 4200,
+    "annual_charges": 8000,
+    "estimated_works": 10000,
+    "known_missing_documents": "titre de propriete, etat locatif"
+  },
+  "photos": ["case_07_photo_cuisine.jpg"],
+  "expected_checks": [
+    {"type": "http_status", "value": 200},
+    {"type": "no_crash"},
+    {"type": "vision_disclaimer_present"}
+  ]
+}

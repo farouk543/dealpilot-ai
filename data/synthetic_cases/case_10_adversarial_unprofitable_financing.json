@@ -1,0 +1,22 @@
+{
+  "case_id": "case_10_adversarial_unprofitable_financing",
+  "category": "adversarial",
+  "description": "Prix demandé très élevé par rapport au loyer — le scénario de base doit être non viable (DSCR < 1) et le système doit le signaler comme risque financier élevé plutôt que produire une offre optimiste.",
+  "form": {
+    "property_type": "Immeuble résidentiel",
+    "location": "Lyon",
+    "asking_price": 1200000,
+    "surface_m2": 380,
+    "units_total": 6,
+    "units_occupied": 6,
+    "monthly_rent": 3000,
+    "annual_charges": 12000,
+    "estimated_works": 20000,
+    "known_missing_documents": "titre de propriete, etat locatif"
+  },
+  "documents": [],
+  "expected_checks": [
+    {"type": "http_status", "value": 200},
+    {"type": "risk_title_contains", "keyword": "Financement non viable"}
+  ]
+}

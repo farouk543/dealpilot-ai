@@ -1,0 +1,233 @@
+services:
+  orchestrator:
+    build:
+      context: .
+      dockerfile: services/orchestrator/Dockerfile
+    ports:
+      - "8010:8000"
+    environment:
+      - INTAKE_SERVICE_URL=http://intake:8000
+      - DOCUMENT_INTEL_SERVICE_URL=http://document-intel:8000
+      - VISION_SERVICE_URL=http://vision:8000
+      - MARKET_SERVICE_URL=http://market:8000
+      - LOCATION_INTEL_SERVICE_URL=http://location-intel:8000
+      - FINANCIAL_ENGINE_SERVICE_URL=http://financial-engine:8000
+      - RISK_SERVICE_URL=http://risk:8000
+      - OFFER_SERVICE_URL=http://offer:8000
+      - DUE_DILIGENCE_SERVICE_URL=http://due-diligence:8000
+      - LAND_FEASIBILITY_SERVICE_URL=http://land-feasibility:8000
+      - DESIGN_AGENT_SERVICE_URL=http://design-agent:8000
+      - INTERIOR_RENDER_SERVICE_URL=http://interior-render:8000
+      - EXTERIOR_RENDER_SERVICE_URL=http://exterior-render:8000
+      - SUMMARY_SERVICE_URL=http://summary:8000
+      - REPORT_SERVICE_URL=http://report:8000
+      - ORCHESTRATOR_DB_PATH=/data/db/checkpoints.sqlite
+    volumes:
+      - orchestrator_db:/data/db
+    depends_on:
+      - intake
+      - document-intel
+      - vision
+      - market
+      - location-intel
+      - financial-engine
+      - risk
+      - offer
+      - due-diligence
+      - land-feasibility
+      - design-agent
+      - interior-render
+      - exterior-render
+      - summary
+      - report
+
+  intake:
+    build:
+      context: .
+      dockerfile: services/intake/Dockerfile
+    ports:
+      - "8011:8000"
+    environment:
+      - UPLOAD_ROOT=/data/uploads
+    volumes:
+      - uploads:/data/uploads
+
+  document-intel:
+    build:
+      context: .
+      dockerfile: services/document-intel/Dockerfile
+    ports:
+      - "8012:8000"
+    environment:
+      - UPLOAD_ROOT=/data/uploads
+      - GROQ_API_KEY=${GROQ_API_KEY}
+      - GROQ_MODEL=${GROQ_MODEL:-openai/gpt-oss-120b}
+    volumes:
+      - uploads:/data/uploads
+    env_file:
+      - .env
+
+  vision:
+    build:
+      context: .
+      dockerfile: services/vision/Dockerfile
+    ports:
+      - "8013:8000"
+    environment:
+      - UPLOAD_ROOT=/data/uploads
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - GEMINI_MODEL=${GEMINI_MODEL:-gemini-3.6-flash}
+    volumes:
+      - uploads:/data/uploads
+    env_file:
+      - .env
+
+  market:
+    build:
+      context: .
+      dockerfile: services/market/Dockerfile
+    ports:
+      - "8014:8000"
+    environment:
+      - DVF_CACHE_ROOT=/data/dvf_cache
+      - DVF_YEARS=${DVF_YEARS:-2023,2022,2021}
+    volumes:
+      - dvf_cache:/data/dvf_cache
+
+  location-intel:
+    build:
+      context: .
+      dockerfile: services/location-intel/Dockerfile
+    ports:
+      - "8019:8000"
+    environment:
+      - GROQ_API_KEY=${GROQ_API_KEY}
+      - GROQ_MODEL=${GROQ_MODEL:-openai/gpt-oss-120b}
+    env_file:
+      - .env
+
+  financial-engine:
+    build:
+      context: .
+      dockerfile: services/financial-engine/Dockerfile
+    ports:
+      - "8015:8000"
+
+  risk:
+    build:
+      context: .
+      dockerfile: services/risk/Dockerfile
+    ports:
+      - "8016:8000"
+
+  offer:
+    build:
+      context: .
+      dockerfile: services/offer/Dockerfile
+    ports:
+      - "8017:8000"
+
+  due-diligence:
+    build:
+      context: .
+      dockerfile: services/due-diligence/Dockerfile
+    ports:
+      - "8018:8000"
+
+  land-feasibility:
+    build:
+      context: .
+      dockerfile: services/land-feasibility/Dockerfile
+    ports:
+      - "8020:8000"
+
+  design-agent:
+    build:
+      context: .
+      dockerfile: services/design-agent/Dockerfile
+    ports:
+      - "8021:8000"
+    environment:
+      - GROQ_API_KEY=${GROQ_API_KEY}
+      - GROQ_MODEL=${GROQ_MODEL:-openai/gpt-oss-120b}
+    env_file:
+      - .env
+
+  interior-render:
+    build:
+      context: .
+      dockerfile: services/interior-render/Dockerfile
+    ports:
+      - "8022:8000"
+    environment:
+      - SD_MODEL_ID=${SD_MODEL_ID:-stabilityai/stable-diffusion-xl-base-1.0}
+      - INTERIOR_RENDER_PUBLIC_URL=http://localhost:8022
+    volumes:
+      - hf_cache:/root/.cache/huggingface
+      - interior_renders:/data/renders
+      - gpu_lock:/data/gpu_lock
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+  exterior-render:
+    build:
+      context: .
+      dockerfile: services/exterior-render/Dockerfile
+    ports:
+      - "8025:8000"
+    environment:
+      - EXTERIOR_RENDER_PUBLIC_URL=http://localhost:8025
+    volumes:
+      - exterior_renders:/data/renders
+      - gpu_lock:/data/gpu_lock
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+  summary:
+    build:
+      context: .
+      dockerfile: services/summary/Dockerfile
+    ports:
+      - "8023:8000"
+    environment:
+      - GROQ_API_KEY=${GROQ_API_KEY}
+      - GROQ_MODEL=${GROQ_MODEL:-openai/gpt-oss-120b}
+    env_file:
+      - .env
+
+  report:
+    build:
+      context: .
+      dockerfile: services/report/Dockerfile
+    ports:
+      - "8024:8000"
+
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    ports:
+      - "8501:8501"
+    environment:
+      - ORCHESTRATOR_URL=http://orchestrator:8000
+    depends_on:
+      - orchestrator
+
+volumes:
+  uploads:
+  dvf_cache:
+  hf_cache:
+  interior_renders:
+  exterior_renders:
+  gpu_lock:
+  orchestrator_db:

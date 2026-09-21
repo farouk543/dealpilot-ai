@@ -1,0 +1,22 @@
+{
+  "case_id": "case_08_adversarial_incompatible_surfaces",
+  "category": "adversarial",
+  "description": "La surface déclarée dans le formulaire diffère de celle indiquée dans le titre de propriété — même mécanisme de détection de contradiction que le loyer, appliqué à un autre champ.",
+  "form": {
+    "property_type": "Immeuble résidentiel",
+    "location": "Lyon",
+    "asking_price": 650000,
+    "surface_m2": 380,
+    "units_total": 6,
+    "units_occupied": 6,
+    "monthly_rent": 4200,
+    "annual_charges": 8000,
+    "estimated_works": 10000,
+    "known_missing_documents": "etat locatif"
+  },
+  "documents": ["case_08_titre_de_propriete_surface_differente.txt"],
+  "expected_checks": [
+    {"type": "http_status", "value": 200},
+    {"type": "field_contested", "field": "surface_m2"}
+  ]
+}

@@ -1,0 +1,411 @@
+{
+  "status": 200,
+  "result": {
+    "deal_id": "e520361e-fa68-485d-b094-4396004a43b2",
+    "created_at": "2026-09-21T08:43:29.325521Z",
+    "current_step": "final_file",
+    "property": {
+      "id": "cef51c70-1bb4-44d2-81d3-e42e6e0be94b",
+      "property_type": "Immeuble résidentiel",
+      "location": "Lyon",
+      "address": null,
+      "asking_price": {
+        "candidates": [
+          {
+            "value": 650000.0,
+            "provenance": {
+              "source_type": "user_hypothesis",
+              "reference": "user_intake_form",
+              "note": null,
+              "confidence": null
+            }
+          }
+        ],
+        "resolved": 650000.0,
+        "contested": false
+      },
+      "surface_m2": {
+        "candidates": [
+          {
+            "value": 380.0,
+            "provenance": {
+              "source_type": "user_hypothesis",
+              "reference": "user_intake_form",
+              "note": null,
+              "confidence": null
+            }
+          }
+        ],
+        "resolved": 380.0,
+        "contested": false
+      },
+      "units_total": {
+        "candidates": [
+          {
+            "value": 6,
+            "provenance": {
+              "source_type": "user_hypothesis",
+              "reference": "user_intake_form",
+              "note": null,
+              "confidence": null
+            }
+          },
+          {
+            "value": 6,
+            "provenance": {
+              "source_type": "document",
+              "reference": "case_03_etat_locatif_contradictoire.txt",
+              "note": null,
+              "confidence": null
+            }
+          }
+        ],
+        "resolved": 6,
+        "contested": false
+      },
+      "units_occupied": {
+        "candidates": [
+          {
+            "value": 6,
+            "provenance": {
+              "source_type": "user_hypothesis",
+              "reference": "user_intake_form",
+              "note": null,
+              "confidence": null
+            }
+          }
+        ],
+        "resolved": 6,
+        "contested": false
+      },
+      "monthly_rent": {
+        "candidates": [
+          {
+            "value": 5000.0,
+            "provenance": {
+              "source_type": "user_hypothesis",
+              "reference": "user_intake_form",
+              "note": null,
+              "confidence": null
+            }
+          },
+          {
+            "value": 3800.0,
+            "provenance": {
+              "source_type": "document",
+              "reference": "case_03_etat_locatif_contradictoire.txt",
+              "note": null,
+              "confidence": null
+            }
+          }
+        ],
+        "resolved": null,
+        "contested": true
+      },
+      "annual_charges": {
+        "candidates": [
+          {
+            "value": 8000.0,
+            "provenance": {
+              "source_type": "user_hypothesis",
+              "reference": "user_intake_form",
+              "note": null,
+              "confidence": null
+            }
+          }
+        ],
+        "resolved": 8000.0,
+        "contested": false
+      },
+      "estimated_works": {
+        "candidates": [
+          {
+            "value": 10000.0,
+            "provenance": {
+              "source_type": "user_hypothesis",
+              "reference": "user_intake_form",
+              "note": null,
+              "confidence": null
+            }
+          }
+        ],
+        "resolved": 10000.0,
+        "contested": false
+      },
+      "documents_received": [
+        "case_03_etat_locatif_contradictoire.txt"
+      ],
+      "documents_missing": [],
+      "photos_received": []
+    },
+    "document_facts": [
+      {
+        "field_name": "market_price_per_m2_median",
+        "value": "5078.12",
+        "provenance": {
+          "source_type": "external_source",
+          "reference": "DVF 2023,2022,2021 / commune(s) 69381,69382,69383,69384,69385,69386,69387,69388,69389",
+          "note": "24794 comparables retenus, 3304 ecartes (prix/m2 hors bornes plausibles)",
+          "confidence": null
+        }
+      },
+      {
+        "field_name": "market_value_low",
+        "value": "1564955.9",
+        "provenance": {
+          "source_type": "external_source",
+          "reference": "DVF 2023,2022,2021 / commune(s) 69381,69382,69383,69384,69385,69386,69387,69388,69389",
+          "note": "24794 comparables retenus, 3304 ecartes (prix/m2 hors bornes plausibles)",
+          "confidence": null
+        }
+      },
+      {
+        "field_name": "market_value_median",
+        "value": "1929685.6",
+        "provenance": {
+          "source_type": "external_source",
+          "reference": "DVF 2023,2022,2021 / commune(s) 69381,69382,69383,69384,69385,69386,69387,69388,69389",
+          "note": "24794 comparables retenus, 3304 ecartes (prix/m2 hors bornes plausibles)",
+          "confidence": null
+        }
+      },
+      {
+        "field_name": "market_value_high",
+        "value": "2290556.4",
+        "provenance": {
+          "source_type": "external_source",
+          "reference": "DVF 2023,2022,2021 / commune(s) 69381,69382,69383,69384,69385,69386,69387,69388,69389",
+          "note": "24794 comparables retenus, 3304 ecartes (prix/m2 hors bornes plausibles)",
+          "confidence": null
+        }
+      },
+      {
+        "field_name": "market_rationale",
+        "value": "Comparables issus de ventes unitaires (appartements/maisons) DVF, extrapoles au prorata de la surface totale du bien : n'equivaut pas a une vente d'immeuble entier et ne tient pas compte d'une decote/surcote liee a la vente en bloc.",
+        "provenance": {
+          "source_type": "external_source",
+          "reference": "DVF 2023,2022,2021 / commune(s) 69381,69382,69383,69384,69385,69386,69387,69388,69389",
+          "note": null,
+          "confidence": null
+        }
+      },
+      {
+        "field_name": "location_latitude",
+        "value": "45.758",
+        "provenance": {
+          "source_type": "external_source",
+          "reference": "BAN/geo.api.gouv.fr",
+          "note": null,
+          "confidence": null
+        }
+      },
+      {
+        "field_name": "location_longitude",
+        "value": "4.8351",
+        "provenance": {
+          "source_type": "external_source",
+          "reference": "BAN/geo.api.gouv.fr",
+          "note": null,
+          "confidence": null
+        }
+      },
+      {
+        "field_name": "location_error",
+        "value": "donnees OpenStreetMap indisponibles (panne ou limite de requetes Overpass)",
+        "provenance": {
+          "source_type": "external_source",
+          "reference": "Overpass API",
+          "note": null,
+          "confidence": null
+        }
+      }
+    ],
+    "financing_assumptions": {
+      "down_payment_pct": 20.0,
+      "interest_rate_pct": 4.0,
+      "loan_term_years": 20,
+      "vacancy_rate_pct": 5.0,
+      "exit_cap_rate_pct": null,
+      "holding_period_years": 10,
+      "target_cap_rate_pct": 6.0
+    },
+    "underwriting": {
+      "assumptions": {
+        "down_payment_pct": 20.0,
+        "interest_rate_pct": 4.0,
+        "loan_term_years": 20,
+        "vacancy_rate_pct": 5.0,
+        "exit_cap_rate_pct": null,
+        "holding_period_years": 10,
+        "target_cap_rate_pct": 6.0
+      },
+      "scenarios": [
+        {
+          "name": "base",
+          "gross_annual_rent": 60000.0,
+          "vacancy_loss": 3000.0,
+          "effective_gross_income": 57000.0,
+          "operating_expenses": 8000.0,
+          "noi": 49000.0,
+          "cap_rate_pct": 7.538,
+          "annual_debt_service": 37813.17,
+          "cash_flow_before_tax": 11186.83,
+          "cash_on_cash_pct": 7.991,
+          "dscr": 1.296,
+          "exit_value": 650000.0,
+          "remaining_loan_balance_at_exit": 311234.47,
+          "irr_pct": 14.987
+        },
+        {
+          "name": "baisse",
+          "gross_annual_rent": 54000.0,
+          "vacancy_loss": 5400.0,
+          "effective_gross_income": 48600.0,
+          "operating_expenses": 8800.0,
+          "noi": 39800.0,
+          "cap_rate_pct": 6.123,
+          "annual_debt_service": 41181.24,
+          "cash_flow_before_tax": -1381.24,
+          "cash_on_cash_pct": -0.987,
+          "dscr": 0.966,
+          "exit_value": 600929.15,
+          "remaining_loan_balance_at_exit": 323551.89,
+          "irr_pct": 6.34
+        },
+        {
+          "name": "hausse",
+          "gross_annual_rent": 63000.0,
+          "vacancy_loss": 1890.0,
+          "effective_gross_income": 61110.0,
+          "operating_expenses": 7600.0,
+          "noi": 53510.0,
+          "cap_rate_pct": 8.232,
+          "annual_debt_service": 36189.49,
+          "cash_flow_before_tax": 17320.51,
+          "cash_on_cash_pct": 12.372,
+          "dscr": 1.479,
+          "exit_value": 692031.44,
+          "remaining_loan_balance_at_exit": 304976.9,
+          "irr_pct": 19.381
+        }
+      ],
+      "breakeven": {
+        "max_rent_drop_pct": 19.63,
+        "max_vacancy_rate_pct": 23.64,
+        "max_charges_increase_pct": 139.84,
+        "max_interest_rate_pct": 7.165
+      }
+    },
+    "risk_register": {
+      "risks": [
+        {
+          "category": "documentaire",
+          "title": "Loyer mensuel incoherent(e) entre sources",
+          "severity": "eleve",
+          "evidence": "5000.0 (user_hypothesis: user_intake_form), 3800.0 (document: case_03_etat_locatif_contradictoire.txt)",
+          "impact": "Impossible de fiabiliser le dossier tant que la valeur reelle n'est pas confirmee.",
+          "owner": "investisseur",
+          "next_action": "Verifier loyer mensuel aupres d'une source faisant autorite (mesure, acte, releve).",
+          "source_reference": "monthly_rent"
+        },
+        {
+          "category": "documentaire",
+          "title": "Titre de propriete non fourni et non signale",
+          "severity": "eleve",
+          "evidence": "Aucun document recu ne correspond a ce mot-cle, et il n'est pas non plus dans les documents manquants declares.",
+          "impact": "Impossible de verifier ce point essentiel du dossier.",
+          "owner": "investisseur",
+          "next_action": "Demander explicitement 'titre de propriete' avant de poursuivre.",
+          "source_reference": "documents_received"
+        },
+        {
+          "category": "documentaire",
+          "title": "Etat locatif / baux non fourni et non signale",
+          "severity": "eleve",
+          "evidence": "Aucun document recu ne correspond a ce mot-cle, et il n'est pas non plus dans les documents manquants declares.",
+          "impact": "Impossible de verifier ce point essentiel du dossier.",
+          "owner": "investisseur",
+          "next_action": "Demander explicitement 'etat locatif / baux' avant de poursuivre.",
+          "source_reference": "documents_received"
+        },
+        {
+          "category": "technique",
+          "title": "Echec d'analyse automatisee (location_error)",
+          "severity": "moyen",
+          "evidence": "donnees OpenStreetMap indisponibles (panne ou limite de requetes Overpass)",
+          "impact": "Cette source n'a pas pu etre analysee automatiquement ; l'information peut etre incomplete.",
+          "owner": "investisseur",
+          "next_action": "Reessayer l'analyse ou traiter cette source manuellement.",
+          "source_reference": "Overpass API"
+        },
+        {
+          "category": "financier",
+          "title": "L'operation devient non rentable en scenario de stress",
+          "severity": "moyen",
+          "evidence": "DSCR scenario baisse = 0.966, cash-flow = -1381.24",
+          "impact": "Une degradation moderee des hypotheses (loyers -10%, vacance +5pts, charges +10%) rend l'operation deficitaire.",
+          "owner": "investisseur",
+          "next_action": "Prevoir une reserve de tresorerie ou revoir le prix d'achat cible.",
+          "source_reference": "underwriting.baisse"
+        }
+      ]
+    },
+    "offer": {
+      "target_price": 650000.0,
+      "max_price": 816666.67,
+      "stress_cap_price": 663333.33,
+      "target_cap_rate_pct": 6.0,
+      "conditions": [
+        "Loyer mensuel incoherent(e) entre sources — Verifier loyer mensuel aupres d'une source faisant autorite (mesure, acte, releve).",
+        "Titre de propriete non fourni et non signale — Demander explicitement 'titre de propriete' avant de poursuivre.",
+        "Etat locatif / baux non fourni et non signale — Demander explicitement 'etat locatif / baux' avant de poursuivre."
+      ],
+      "loi_draft": "LETTRE D'INTENTION NON CONTRAIGNANTE (PROJET — A VALIDER PAR L'UTILISATEUR AVANT ENVOI)\n\nBien : Immeuble résidentiel — Lyon\nPrix propose (indicatif) : 650 000 EUR\n\nCette lettre exprime un interet non contraignant pour l'acquisition du bien ci-dessus,\nsous reserve des conditions suivantes et d'une due diligence complete :\n\n- Loyer mensuel incoherent(e) entre sources — Verifier loyer mensuel aupres d'une source faisant autorite (mesure, acte, releve).\n- Titre de propriete non fourni et non signale — Demander explicitement 'titre de propriete' avant de poursuivre.\n- Etat locatif / baux non fourni et non signale — Demander explicitement 'etat locatif / baux' avant de poursuivre.\n\nCe document est un projet automatiquement genere. Il ne constitue ni une offre ferme,\nni un engagement contractuel, et doit etre revu et valide par l'investisseur (et, le cas\necheant, son conseil) avant toute transmission au vendeur.\n",
+      "rationale": "Prix maximum = NOI de base (49000.0) / taux de capitalisation cible (6.0%). Valeur de marche mediane (DVF) = 1929685.6. Prix cible = min(valeur de marche, prix maximum), plafonne par le prix demande (650000.0). Plafond en scenario de stress = NOI du scenario 'baisse' / meme taux de capitalisation cible."
+    },
+    "due_diligence": {
+      "tasks": [
+        {
+          "task_type": "question_ouverte",
+          "description": "Verifier loyer mensuel aupres d'une source faisant autorite (mesure, acte, releve).",
+          "status": "ouvert",
+          "severity_driver": "eleve",
+          "linked_risk_title": "Loyer mensuel incoherent(e) entre sources"
+        },
+        {
+          "task_type": "document_a_demander",
+          "description": "Demander explicitement 'titre de propriete' avant de poursuivre.",
+          "status": "ouvert",
+          "severity_driver": "eleve",
+          "linked_risk_title": "Titre de propriete non fourni et non signale"
+        },
+        {
+          "task_type": "document_a_demander",
+          "description": "Demander explicitement 'etat locatif / baux' avant de poursuivre.",
+          "status": "ouvert",
+          "severity_driver": "eleve",
+          "linked_risk_title": "Etat locatif / baux non fourni et non signale"
+        },
+        {
+          "task_type": "question_ouverte",
+          "description": "Reessayer l'analyse ou traiter cette source manuellement.",
+          "status": "ouvert",
+          "severity_driver": "moyen",
+          "linked_risk_title": "Echec d'analyse automatisee (location_error)"
+        },
+        {
+          "task_type": "validation_professionnelle",
+          "description": "Prevoir une reserve de tresorerie ou revoir le prix d'achat cible.",
+          "status": "ouvert",
+          "severity_driver": "moyen",
+          "linked_risk_title": "L'operation devient non rentable en scenario de stress"
+        }
+      ],
+      "unresolved_high_risk_tasks": 3,
+      "decision_ready": false,
+      "audit_trail_note": "5 tache(s) de due diligence generee(s) a partir de 5 risque(s) identifie(s). Chaque tache reste reliee au risque (et donc a la source) qui l'a declenchee via linked_risk_title, formant la piste d'audit de l'annonce a la decision."
+    },
+    "pending_approval": null,
+    "approval_history": []
+  }
+}

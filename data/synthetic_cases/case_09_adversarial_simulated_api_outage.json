@@ -1,0 +1,24 @@
+{
+  "case_id": "case_09_adversarial_simulated_api_outage",
+  "category": "adversarial",
+  "description": "Le service 'market' est arrêté avant la soumission pour simuler une panne — vérifie que le pipeline se termine quand même avec un fait d'erreur explicite au lieu de planter (HTTP 500).",
+  "disable_service": "market",
+  "form": {
+    "property_type": "Immeuble résidentiel",
+    "location": "Lyon",
+    "asking_price": 650000,
+    "surface_m2": 380,
+    "units_total": 6,
+    "units_occupied": 6,
+    "monthly_rent": 4200,
+    "annual_charges": 8000,
+    "estimated_works": 10000,
+    "known_missing_documents": "titre de propriete, etat locatif"
+  },
+  "documents": [],
+  "expected_checks": [
+    {"type": "http_status", "value": 200},
+    {"type": "no_crash"},
+    {"type": "fact_contains", "field_name": "market_error"}
+  ]
+}

@@ -1,0 +1,535 @@
+{
+  "status": 200,
+  "result": {
+    "deal_id": "3d973ad1-bfe5-4835-925e-fd0d1ef2eefc",
+    "created_at": "2026-09-21T08:43:24.777770Z",
+    "current_step": "final_file",
+    "property": {
+      "id": "da6a8047-9df5-4818-891b-db4e9a10d68c",
+      "property_type": "Maison individuelle",
+      "location": "Bordeaux",
+      "address": null,
+      "asking_price": {
+        "candidates": [
+          {
+            "value": 300000.0,
+            "provenance": {
+              "source_type": "user_hypothesis",
+              "reference": "user_intake_form",
+              "note": null,
+              "confidence": null
+            }
+          }
+        ],
+        "resolved": 300000.0,
+        "contested": false
+      },
+      "surface_m2": {
+        "candidates": [
+          {
+            "value": 100.0,
+            "provenance": {
+              "source_type": "user_hypothesis",
+              "reference": "user_intake_form",
+              "note": null,
+              "confidence": null
+            }
+          }
+        ],
+        "resolved": 100.0,
+        "contested": false
+      },
+      "units_total": {
+        "candidates": [
+          {
+            "value": 1,
+            "provenance": {
+              "source_type": "user_hypothesis",
+              "reference": "user_intake_form",
+              "note": null,
+              "confidence": null
+            }
+          }
+        ],
+        "resolved": 1,
+        "contested": false
+      },
+      "units_occupied": {
+        "candidates": [
+          {
+            "value": 1,
+            "provenance": {
+              "source_type": "user_hypothesis",
+              "reference": "user_intake_form",
+              "note": null,
+              "confidence": null
+            }
+          }
+        ],
+        "resolved": 1,
+        "contested": false
+      },
+      "monthly_rent": {
+        "candidates": [
+          {
+            "value": 1200.0,
+            "provenance": {
+              "source_type": "user_hypothesis",
+              "reference": "user_intake_form",
+              "note": null,
+              "confidence": null
+            }
+          }
+        ],
+        "resolved": 1200.0,
+        "contested": false
+      },
+      "annual_charges": {
+        "candidates": [
+          {
+            "value": 2000.0,
+            "provenance": {
+              "source_type": "user_hypothesis",
+              "reference": "user_intake_form",
+              "note": null,
+              "confidence": null
+            }
+          }
+        ],
+        "resolved": 2000.0,
+        "contested": false
+      },
+      "estimated_works": {
+        "candidates": [
+          {
+            "value": 0.0,
+            "provenance": {
+              "source_type": "user_hypothesis",
+              "reference": "user_intake_form",
+              "note": null,
+              "confidence": null
+            }
+          }
+        ],
+        "resolved": 0.0,
+        "contested": false
+      },
+      "documents_received": [],
+      "documents_missing": [],
+      "photos_received": []
+    },
+    "document_facts": [
+      {
+        "field_name": "market_price_per_m2_median",
+        "value": "4895.83",
+        "provenance": {
+          "source_type": "external_source",
+          "reference": "DVF 2023,2022,2021 / commune(s) 33063",
+          "note": "16954 comparables retenus, 2278 ecartes (prix/m2 hors bornes plausibles)",
+          "confidence": null
+        }
+      },
+      {
+        "field_name": "market_value_low",
+        "value": "400000.0",
+        "provenance": {
+          "source_type": "external_source",
+          "reference": "DVF 2023,2022,2021 / commune(s) 33063",
+          "note": "16954 comparables retenus, 2278 ecartes (prix/m2 hors bornes plausibles)",
+          "confidence": null
+        }
+      },
+      {
+        "field_name": "market_value_median",
+        "value": "489583.0",
+        "provenance": {
+          "source_type": "external_source",
+          "reference": "DVF 2023,2022,2021 / commune(s) 33063",
+          "note": "16954 comparables retenus, 2278 ecartes (prix/m2 hors bornes plausibles)",
+          "confidence": null
+        }
+      },
+      {
+        "field_name": "market_value_high",
+        "value": "601435.5",
+        "provenance": {
+          "source_type": "external_source",
+          "reference": "DVF 2023,2022,2021 / commune(s) 33063",
+          "note": "16954 comparables retenus, 2278 ecartes (prix/m2 hors bornes plausibles)",
+          "confidence": null
+        }
+      },
+      {
+        "field_name": "market_rationale",
+        "value": "Comparables issus de ventes unitaires (appartements/maisons) DVF, extrapoles au prorata de la surface totale du bien : n'equivaut pas a une vente d'immeuble entier et ne tient pas compte d'une decote/surcote liee a la vente en bloc.",
+        "provenance": {
+          "source_type": "external_source",
+          "reference": "DVF 2023,2022,2021 / commune(s) 33063",
+          "note": null,
+          "confidence": null
+        }
+      },
+      {
+        "field_name": "location_latitude",
+        "value": "44.8624",
+        "provenance": {
+          "source_type": "external_source",
+          "reference": "BAN/geo.api.gouv.fr",
+          "note": null,
+          "confidence": null
+        }
+      },
+      {
+        "field_name": "location_longitude",
+        "value": "-0.5848",
+        "provenance": {
+          "source_type": "external_source",
+          "reference": "BAN/geo.api.gouv.fr",
+          "note": null,
+          "confidence": null
+        }
+      },
+      {
+        "field_name": "location_count:commerces",
+        "value": "12",
+        "provenance": {
+          "source_type": "external_source",
+          "reference": "OpenStreetMap/Overpass, rayon 400m",
+          "note": null,
+          "confidence": null
+        }
+      },
+      {
+        "field_name": "location_count:restauration",
+        "value": "4",
+        "provenance": {
+          "source_type": "external_source",
+          "reference": "OpenStreetMap/Overpass, rayon 400m",
+          "note": null,
+          "confidence": null
+        }
+      },
+      {
+        "field_name": "location_count:sante",
+        "value": "3",
+        "provenance": {
+          "source_type": "external_source",
+          "reference": "OpenStreetMap/Overpass, rayon 400m",
+          "note": null,
+          "confidence": null
+        }
+      },
+      {
+        "field_name": "location_count:education",
+        "value": "0",
+        "provenance": {
+          "source_type": "external_source",
+          "reference": "OpenStreetMap/Overpass, rayon 400m",
+          "note": null,
+          "confidence": null
+        }
+      },
+      {
+        "field_name": "location_count:services_bancaires",
+        "value": "2",
+        "provenance": {
+          "source_type": "external_source",
+          "reference": "OpenStreetMap/Overpass, rayon 400m",
+          "note": null,
+          "confidence": null
+        }
+      },
+      {
+        "field_name": "location_count:transport",
+        "value": "9",
+        "provenance": {
+          "source_type": "external_source",
+          "reference": "OpenStreetMap/Overpass, rayon 400m",
+          "note": null,
+          "confidence": null
+        }
+      },
+      {
+        "field_name": "location_vibrancy_index",
+        "value": "100",
+        "provenance": {
+          "source_type": "external_source",
+          "reference": "OpenStreetMap/Overpass, rayon 400m",
+          "note": null,
+          "confidence": null
+        }
+      },
+      {
+        "field_name": "location_context",
+        "value": "Le quartier autour de la maison individuelle à Bordeaux bénéficie d’une densité commerciale respectable (12 commerces) et d’une offre de restauration (4 établissements) ainsi que de services de santé (3 établissements) dans un rayon de 400 m. La présence de 9 arrêts de transport public indique une bonne desserte, ce qui rend le secteur attractif pour des locataires actifs (jeunes cadres, étudiants en mobilité, seniors) qui recherchent proximité des commodités et facilité d’accès. L’absence d’établissements d’enseignement (0) constitue toutefois un frein pour les familles avec enfants, qui devront se déplacer plus loin pour les écoles, ce qui peut réduire l’attractivité locative auprès de ce segment. En résumé, le profil du quartier convient surtout à des locataires individuels ou en couple sans enfants, recherchant un cadre urbain bien pourvu en services de proximité et en mobilité.",
+        "provenance": {
+          "source_type": "external_source",
+          "reference": "Analyse LLM sur donnees OSM",
+          "note": null,
+          "confidence": null
+        }
+      },
+      {
+        "field_name": "location_opportunity:commercial",
+        "value": "Si le bien comporte un rez‑de‑chaussée, l’ouverture d’un petit commerce de proximité (ex. épicerie de quartier ou café) pourrait profiter de la forte densité commerciale (12 commerces) tout en répondant à la demande locale, notamment auprès des usagers du transport (9 arrêts) qui circulent quotidiennement dans le secteur.",
+        "provenance": {
+          "source_type": "external_source",
+          "reference": "Analyse LLM sur donnees OSM",
+          "note": null,
+          "confidence": 0.68
+        }
+      },
+      {
+        "field_name": "location_opportunity:service",
+        "value": "Un point de vente de produits de santé (pharmacie ou parapharmacie) pourrait être envisagé, compte tenu de la présence de 3 établissements de santé mais de l’absence d’indication précise sur la nature de ces services, laissant une marge pour un commerce complémentaire.",
+        "provenance": {
+          "source_type": "external_source",
+          "reference": "Analyse LLM sur donnees OSM",
+          "note": null,
+          "confidence": 0.55
+        }
+      },
+      {
+        "field_name": "location_risk",
+        "value": "Absence d'établissements d'enseignement à moins de 400 m, ce qui décourage les familles avec enfants et limite la diversification du profil locatif.",
+        "provenance": {
+          "source_type": "external_source",
+          "reference": "Analyse LLM sur donnees OSM",
+          "note": "severity:moyen",
+          "confidence": null
+        }
+      },
+      {
+        "field_name": "location_risk",
+        "value": "Concurrence élevée parmi les commerces existants (12 commerces) pouvant rendre difficile le lancement d’un nouveau commerce sans différenciation claire.",
+        "provenance": {
+          "source_type": "external_source",
+          "reference": "Analyse LLM sur donnees OSM",
+          "note": "severity:faible",
+          "confidence": null
+        }
+      }
+    ],
+    "financing_assumptions": {
+      "down_payment_pct": 20.0,
+      "interest_rate_pct": 4.0,
+      "loan_term_years": 20,
+      "vacancy_rate_pct": 5.0,
+      "exit_cap_rate_pct": null,
+      "holding_period_years": 10,
+      "target_cap_rate_pct": 6.0
+    },
+    "underwriting": {
+      "assumptions": {
+        "down_payment_pct": 20.0,
+        "interest_rate_pct": 4.0,
+        "loan_term_years": 20,
+        "vacancy_rate_pct": 5.0,
+        "exit_cap_rate_pct": null,
+        "holding_period_years": 10,
+        "target_cap_rate_pct": 6.0
+      },
+      "scenarios": [
+        {
+          "name": "base",
+          "gross_annual_rent": 14400.0,
+          "vacancy_loss": 720.0,
+          "effective_gross_income": 13680.0,
+          "operating_expenses": 2000.0,
+          "noi": 11680.0,
+          "cap_rate_pct": 3.893,
+          "annual_debt_service": 17452.23,
+          "cash_flow_before_tax": -5772.23,
+          "cash_on_cash_pct": -9.62,
+          "dscr": 0.669,
+          "exit_value": 300000.0,
+          "remaining_loan_balance_at_exit": 143646.68,
+          "irr_pct": 3.849
+        },
+        {
+          "name": "baisse",
+          "gross_annual_rent": 12960.0,
+          "vacancy_loss": 1296.0,
+          "effective_gross_income": 11664.0,
+          "operating_expenses": 2200.0,
+          "noi": 9464.0,
+          "cap_rate_pct": 3.155,
+          "annual_debt_service": 19006.73,
+          "cash_flow_before_tax": -9542.73,
+          "cash_on_cash_pct": -15.905,
+          "dscr": 0.498,
+          "exit_value": 258956.59,
+          "remaining_loan_balance_at_exit": 149331.64,
+          "irr_pct": -5.414
+        },
+        {
+          "name": "hausse",
+          "gross_annual_rent": 15120.0,
+          "vacancy_loss": 453.6,
+          "effective_gross_income": 14666.4,
+          "operating_expenses": 1900.0,
+          "noi": 12766.4,
+          "cap_rate_pct": 4.255,
+          "annual_debt_service": 16702.84,
+          "cash_flow_before_tax": -3936.44,
+          "cash_on_cash_pct": -6.561,
+          "dscr": 0.764,
+          "exit_value": 339941.77,
+          "remaining_loan_balance_at_exit": 140758.57,
+          "irr_pct": 8.831
+        }
+      ],
+      "breakeven": {
+        "max_rent_drop_pct": -42.19,
+        "max_vacancy_rate_pct": -35.08,
+        "max_charges_increase_pct": -288.61,
+        "max_interest_rate_pct": null
+      }
+    },
+    "risk_register": {
+      "risks": [
+        {
+          "category": "documentaire",
+          "title": "Titre de propriete non fourni et non signale",
+          "severity": "eleve",
+          "evidence": "Aucun document recu ne correspond a ce mot-cle, et il n'est pas non plus dans les documents manquants declares.",
+          "impact": "Impossible de verifier ce point essentiel du dossier.",
+          "owner": "investisseur",
+          "next_action": "Demander explicitement 'titre de propriete' avant de poursuivre.",
+          "source_reference": "documents_received"
+        },
+        {
+          "category": "documentaire",
+          "title": "Etat locatif / baux non fourni et non signale",
+          "severity": "eleve",
+          "evidence": "Aucun document recu ne correspond a ce mot-cle, et il n'est pas non plus dans les documents manquants declares.",
+          "impact": "Impossible de verifier ce point essentiel du dossier.",
+          "owner": "investisseur",
+          "next_action": "Demander explicitement 'etat locatif / baux' avant de poursuivre.",
+          "source_reference": "documents_received"
+        },
+        {
+          "category": "marche",
+          "title": "Risque lie a l'emplacement",
+          "severity": "moyen",
+          "evidence": "Absence d'établissements d'enseignement à moins de 400 m, ce qui décourage les familles avec enfants et limite la diversification du profil locatif.",
+          "impact": "Peut affecter l'attractivite locative ou la valorisation du bien.",
+          "owner": "investisseur",
+          "next_action": "Prendre en compte ce facteur d'emplacement dans la decision finale.",
+          "source_reference": "Analyse LLM sur donnees OSM"
+        },
+        {
+          "category": "marche",
+          "title": "Risque lie a l'emplacement",
+          "severity": "faible",
+          "evidence": "Concurrence élevée parmi les commerces existants (12 commerces) pouvant rendre difficile le lancement d’un nouveau commerce sans différenciation claire.",
+          "impact": "Peut affecter l'attractivite locative ou la valorisation du bien.",
+          "owner": "investisseur",
+          "next_action": "Prendre en compte ce facteur d'emplacement dans la decision finale.",
+          "source_reference": "Analyse LLM sur donnees OSM"
+        },
+        {
+          "category": "financier",
+          "title": "Financement non viable en scenario de base (DSCR < 1)",
+          "severity": "eleve",
+          "evidence": "DSCR base = 0.669",
+          "impact": "Le NOI ne couvre pas le service de la dette meme dans l'hypothese centrale.",
+          "owner": "investisseur",
+          "next_action": "Renegocier le prix, augmenter l'apport, ou abandonner l'operation.",
+          "source_reference": "underwriting.base.dscr"
+        },
+        {
+          "category": "financier",
+          "title": "L'operation devient non rentable en scenario de stress",
+          "severity": "moyen",
+          "evidence": "DSCR scenario baisse = 0.498, cash-flow = -9542.73",
+          "impact": "Une degradation moderee des hypotheses (loyers -10%, vacance +5pts, charges +10%) rend l'operation deficitaire.",
+          "owner": "investisseur",
+          "next_action": "Prevoir une reserve de tresorerie ou revoir le prix d'achat cible.",
+          "source_reference": "underwriting.baisse"
+        },
+        {
+          "category": "financier",
+          "title": "Operation tres sensible aux hypotheses (faible marge de manoeuvre)",
+          "severity": "moyen",
+          "evidence": "Seuils de rupture proches du scenario de base : baisse de loyer de seulement -42.19%; vacance de seulement -35.08%",
+          "impact": "Une petite degradation d'une seule hypothese suffit a rendre l'operation non viable (DSCR < 1).",
+          "owner": "investisseur",
+          "next_action": "Ne pas depasser le prix cible ; negocier une marge de securite supplementaire.",
+          "source_reference": "underwriting.breakeven"
+        }
+      ]
+    },
+    "offer": {
+      "target_price": 194666.67,
+      "max_price": 194666.67,
+      "stress_cap_price": 157733.33,
+      "target_cap_rate_pct": 6.0,
+      "conditions": [
+        "Titre de propriete non fourni et non signale — Demander explicitement 'titre de propriete' avant de poursuivre.",
+        "Etat locatif / baux non fourni et non signale — Demander explicitement 'etat locatif / baux' avant de poursuivre.",
+        "Financement non viable en scenario de base (DSCR < 1) — Renegocier le prix, augmenter l'apport, ou abandonner l'operation."
+      ],
+      "loi_draft": "LETTRE D'INTENTION NON CONTRAIGNANTE (PROJET — A VALIDER PAR L'UTILISATEUR AVANT ENVOI)\n\nBien : Maison individuelle — Bordeaux\nPrix propose (indicatif) : 194 667 EUR\n\nCette lettre exprime un interet non contraignant pour l'acquisition du bien ci-dessus,\nsous reserve des conditions suivantes et d'une due diligence complete :\n\n- Titre de propriete non fourni et non signale — Demander explicitement 'titre de propriete' avant de poursuivre.\n- Etat locatif / baux non fourni et non signale — Demander explicitement 'etat locatif / baux' avant de poursuivre.\n- Financement non viable en scenario de base (DSCR < 1) — Renegocier le prix, augmenter l'apport, ou abandonner l'operation.\n\nCe document est un projet automatiquement genere. Il ne constitue ni une offre ferme,\nni un engagement contractuel, et doit etre revu et valide par l'investisseur (et, le cas\necheant, son conseil) avant toute transmission au vendeur.\n",
+      "rationale": "Prix maximum = NOI de base (11680.0) / taux de capitalisation cible (6.0%). Valeur de marche mediane (DVF) = 489583.0. Prix cible = min(valeur de marche, prix maximum), plafonne par le prix demande (300000.0). Plafond en scenario de stress = NOI du scenario 'baisse' / meme taux de capitalisation cible."
+    },
+    "due_diligence": {
+      "tasks": [
+        {
+          "task_type": "document_a_demander",
+          "description": "Demander explicitement 'titre de propriete' avant de poursuivre.",
+          "status": "ouvert",
+          "severity_driver": "eleve",
+          "linked_risk_title": "Titre de propriete non fourni et non signale"
+        },
+        {
+          "task_type": "document_a_demander",
+          "description": "Demander explicitement 'etat locatif / baux' avant de poursuivre.",
+          "status": "ouvert",
+          "severity_driver": "eleve",
+          "linked_risk_title": "Etat locatif / baux non fourni et non signale"
+        },
+        {
+          "task_type": "question_ouverte",
+          "description": "Prendre en compte ce facteur d'emplacement dans la decision finale.",
+          "status": "ouvert",
+          "severity_driver": "moyen",
+          "linked_risk_title": "Risque lie a l'emplacement"
+        },
+        {
+          "task_type": "question_ouverte",
+          "description": "Prendre en compte ce facteur d'emplacement dans la decision finale.",
+          "status": "ouvert",
+          "severity_driver": "faible",
+          "linked_risk_title": "Risque lie a l'emplacement"
+        },
+        {
+          "task_type": "validation_professionnelle",
+          "description": "Renegocier le prix, augmenter l'apport, ou abandonner l'operation.",
+          "status": "ouvert",
+          "severity_driver": "eleve",
+          "linked_risk_title": "Financement non viable en scenario de base (DSCR < 1)"
+        },
+        {
+          "task_type": "validation_professionnelle",
+          "description": "Prevoir une reserve de tresorerie ou revoir le prix d'achat cible.",
+          "status": "ouvert",
+          "severity_driver": "moyen",
+          "linked_risk_title": "L'operation devient non rentable en scenario de stress"
+        },
+        {
+          "task_type": "validation_professionnelle",
+          "description": "Ne pas depasser le prix cible ; negocier une marge de securite supplementaire.",
+          "status": "ouvert",
+          "severity_driver": "moyen",
+          "linked_risk_title": "Operation tres sensible aux hypotheses (faible marge de manoeuvre)"
+        }
+      ],
+      "unresolved_high_risk_tasks": 3,
+      "decision_ready": false,
+      "audit_trail_note": "7 tache(s) de due diligence generee(s) a partir de 7 risque(s) identifie(s). Chaque tache reste reliee au risque (et donc a la source) qui l'a declenchee via linked_risk_title, formant la piste d'audit de l'annonce a la decision."
+    },
+    "pending_approval": null,
+    "approval_history": []
+  }
+}

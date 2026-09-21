@@ -1,0 +1,22 @@
+{
+  "case_id": "case_06_adversarial_abnormal_rent",
+  "category": "adversarial",
+  "description": "Loyer mensuel invraisemblablement élevé par rapport au prix et à la surface — teste si le système détecte l'implausibilité plutôt que de produire des chiffres flatteurs sans avertissement.",
+  "form": {
+    "property_type": "Immeuble résidentiel",
+    "location": "Lyon",
+    "asking_price": 500000,
+    "surface_m2": 300,
+    "units_total": 6,
+    "units_occupied": 6,
+    "monthly_rent": 25000,
+    "annual_charges": 8000,
+    "estimated_works": 10000,
+    "known_missing_documents": "titre de propriete, etat locatif"
+  },
+  "documents": [],
+  "expected_checks": [
+    {"type": "http_status", "value": 200},
+    {"type": "known_gap", "note": "Aucune règle dédiée à la plausibilité du loyer vs marché n'existe dans risk/app/rules.py — un loyer irréaliste produit des chiffres financiers flatteurs sans avertissement spécifique. Limitation découverte par ce test, voir docs/eval_results.md."}
+  ]
+}
