@@ -1,6 +1,6 @@
 # Plan d'itération — 2 prochaines semaines
 
-Ce plan part de l'état actuel (système fonctionnel, 15 microservices, 11 cas synthétiques évalués,
+Ce plan part de l'état actuel (système fonctionnel, 17 microservices, 11 cas synthétiques évalués,
 voir `docs/eval_results.md`) et priorise ce qui a le plus d'impact avant une exposition à de vrais
 utilisateurs.
 
@@ -55,13 +55,29 @@ indépendamment ("montre-moi tous les dossiers avec un risque élevé non résol
 
 ## Priorité 5 — Fiabilité GPU en production
 
-Le verrou GPU actuel (`threading.Lock`, `docs/architecture.md`) suppose un seul processus. Pour
-plusieurs utilisateurs simultanés en environnement réel :
+Le verrou GPU inter-services (`flock`, `docs/architecture.md`) sérialise correctement deux services
+sur un seul GPU, mais suppose toujours un seul GPU physique. Pour plusieurs utilisateurs simultanés
+en environnement réel :
 - Ajouter une file d'attente visible côté frontend (position dans la file, temps d'attente estimé)
   plutôt qu'un blocage silencieux.
 - Évaluer un second GPU ou un provider managé (Replicate/Modal) pour absorber les pics, en gardant le
   mode auto-hébergé comme option par défaut (déjà écarté une fois pour coût, voir
   `docs/architecture.md`, mais viable en scale-out ponctuel).
+- Effort estimé : 2-3 jours.
+
+## Priorité 6 — Couverture de tests unitaires manquante
+
+Trouvé lors de l'audit global du système : `intake`, `document-intel`, `vision`, `market`,
+`design-agent` et `exterior-render` n'ont aucun test unitaire (6 services sur 17). Certains de ces
+services (`document-intel`, `design-agent`) instanciaient en plus leur client Groq au chargement du
+module, rendant impossible le test de la moindre logique pure sans clé API réelle — déjà corrigé
+pour 4 services par un chargement paresseux du client, à généraliser.
+
+- Écrire des tests pour la logique pure de chaque service (parsing, validation, construction de
+  requêtes) sans dépendre d'appels réseau réels — suivre le modèle déjà en place dans
+  `location-intel/tests/test_osm.py` (teste `_build_query`/`aggregate_categories`, pas l'appel HTTP).
+- `exterior-render` (bpy/Blender) reste difficile à tester unitairement de façon conventionnelle —
+  envisager des tests de fumée automatisés plutôt que du pytest classique.
 - Effort estimé : 2-3 jours.
 
 ## Ce qui n'est délibérément pas dans ce plan

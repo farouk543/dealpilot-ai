@@ -5,8 +5,8 @@ Système intelligent d'acquisition, de promotion et de construction immobilière
 Transforme une opportunité immobilière (annonce + documents + photos) en dossier d'analyse
 structuré et tracé : intelligence documentaire, analyse visuelle, comparables de marché,
 souscription financière déterministe, registre de risques, stratégie d'offre et due diligence.
-Inclut aussi un module promoteur/citoyen (faisabilité de terrain, maquette 3D, design IA
-conversationnel, rendu intérieur/jardin photoréaliste).
+Inclut aussi un module promoteur/citoyen (faisabilité de terrain, vue 360° photoréaliste du
+bâtiment, design IA conversationnel, rendu intérieur/jardin photoréaliste).
 
 **Ce que le système ne fait pas** : il ne décide jamais d'acheter à votre place, ne donne pas de
 conseil juridique ou financier engageant, et ne certifie aucun état structurel. Voir
@@ -50,8 +50,8 @@ seront de nouveau accessibles au prochain démarrage.
   l'analyse complète en 10 étapes, peut simuler une contre-offre, comparer plusieurs dossiers,
   générer un résumé en langage simple, et exporter le dossier en PDF ou Excel.
 - **🏗️ Promoteur** : évalue la faisabilité de construction sur un terrain (avec zone PLU réelle si
-  une adresse est donnée), conçoit un bâtiment via un agent conversationnel, visualise une maquette
-  3D avec simulation de chantier (4D/5D), génère des rendus intérieur/jardin photoréalistes.
+  une adresse est donnée), conçoit un bâtiment via un agent conversationnel, génère une vue à 360°
+  photoréaliste du bâtiment ainsi que des rendus intérieur/jardin.
 - **🏠 Citoyen** : même module que le promoteur, pour un particulier qui veut comprendre ce qu'il
   peut construire sur son terrain.
 

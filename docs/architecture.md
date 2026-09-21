@@ -2,7 +2,7 @@
 
 ## Vue d'ensemble
 
-15 microservices FastAPI + un frontend Streamlit, orchestrés par un service `orchestrator` qui
+16 microservices FastAPI + un frontend Streamlit, orchestrés par un service `orchestrator` qui
 exécute un graphe LangGraph (10 étapes séquentielles pour l'acquisition), et proxy les appels du
 module promoteur/citoyen (faisabilité, design conversationnel, rendu IA, résumé, export).
 
@@ -21,7 +21,12 @@ module promoteur/citoyen (faisabilité, design conversationnel, rendu IA, résum
         ▼          ▼             ▼             ▼          ▼           ▼
       risk  →   offer  →  due-diligence      land-feasibility   design-agent
                                                     │                 │
-                                              interior-render    summary   report
+                                          interior-render      exterior-render
+                                          (SDXL, façade 360°)  (Blender/Cycles, dans le
+                                                                dépôt mais hors parcours
+                                                                principal — voir plus bas)
+                                                    │
+                                             summary   report
 ```
 
 Chaque service ne connaît que sa propre responsabilité ; seul l'orchestrator voit l'état complet
@@ -37,8 +42,8 @@ vision, marché, finance, risque, offre, due diligence) permet de :
   `docs/eval_results.md`, cas `case_09` — trouvé en défaut puis corrigé).
 - Séparer les responsabilités de test : chaque service a sa propre suite `pytest` indépendante.
 
-Coût accepté en échange : plus de complexité opérationnelle (13 conteneurs à faire tourner, un
-`docker-compose.yml` de ~300 lignes), latence réseau interne, et — jusqu'à récemment — état partagé
+Coût accepté en échange : plus de complexité opérationnelle (17 conteneurs à faire tourner, un
+`docker-compose.yml` de ~350 lignes), latence réseau interne, et — jusqu'à récemment — état partagé
 minimal (voir plus bas).
 
 ## Contrats partagés (`shared/dealpilot_shared`)
@@ -80,12 +85,17 @@ un historique interrogeable indépendamment du graphe d'exécution (voir `docs/i
   son service en aval et les transforme en un fait d'erreur visible (`*_error`) plutôt que de
   laisser l'exception remonter. Voir `docs/eval_results.md` pour la découverte et la correction du
   point qui manquait initialement (`market`).
-- **Verrou GPU** (`services/interior-render`) : un seul GPU disponible, un `threading.Lock` sérialise
-  les générations au lieu de les laisser se corrompre mutuellement en concurrence.
+- **Verrou GPU inter-services** (`shared/dealpilot_shared/gpu_lock.py`) : un seul GPU disponible,
+  partagé entre `interior-render` (SDXL) et `exterior-render` (Blender/Cycles) — deux conteneurs
+  séparés qu'un simple `threading.Lock` local ne peut pas coordonner. Un verrou de fichier
+  (`flock`) sur un volume Docker monté dans les deux services fait office de mutex cross-process.
+  Ajouté après qu'un test de contention réel a montré un ralentissement mutuel de ~2× sans lui
+  (VRAM à moins de 300 Mo de la limite de la carte) ; `interior-render` garde en plus son propre
+  `threading.Lock` pour les requêtes concurrentes au sein du même processus.
 - **Logging structuré avec ID de corrélation** (`shared/dealpilot_shared/logging_utils.py`) : chaque
   dossier (`deal_id`) est propagé en en-tête HTTP (`X-Correlation-ID`) à travers tous les appels
   inter-services, permettant de retrouver tout le parcours d'un dossier dans les logs combinés des
-  13 services.
+  17 services.
 
 ## Sources de données externes
 
@@ -97,7 +107,8 @@ un historique interrogeable indépendamment du graphe d'exécution (voir `docs/i
 | BAN (`api-adresse.data.gouv.fr`) | Géocodage d'adresse | Base d'adresses nationale officielle, gratuite |
 | Geoportail de l'Urbanisme / Apicarto (`apicarto.ign.fr`) | Zone PLU réelle d'une parcelle | Registre officiel — donne l'identité de la zone, pas les règles chiffrées (le registre ne les expose pas nationalement en format machine-lisible) |
 | Overpass API (OpenStreetMap) | Points d'intérêt du quartier | Open data, gratuit, couverture dense en France |
-| Stable Diffusion XL (auto-hébergé) | Rendu photoréaliste intérieur/jardin | Gratuit et illimité une fois le modèle téléchargé, contrairement aux APIs payantes (Replicate testé puis abandonné pour cette raison) |
+| Stable Diffusion XL (auto-hébergé) | Rendu photoréaliste intérieur/jardin/façade 360° | Gratuit et illimité une fois le modèle téléchargé, contrairement aux APIs payantes (Replicate testé puis abandonné pour cette raison) |
+| Blender/Cycles (auto-hébergé, `exterior-render`) | Maquette 3D mesurable animée par phase de construction | Piste explorée pour un volume géométriquement exact ; conservée dans le dépôt mais retirée du parcours principal après comparaison visuelle avec le rendu SDXL — voir `docs/case_study.md` |
 
 ## Non-goals techniques (rappel)
 
