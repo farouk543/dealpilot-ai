@@ -1,11 +1,11 @@
 {
   "status": 200,
   "result": {
-    "deal_id": "181770ed-c7a4-44b7-a5b2-2fb9b72032b6",
-    "created_at": "2026-09-21T08:46:03.100585Z",
+    "deal_id": "0620f72c-66e6-4bbc-9178-95330d930151",
+    "created_at": "2026-09-21T09:44:40.317555Z",
     "current_step": "final_file",
     "property": {
-      "id": "125daf01-e1bd-45b7-93dd-84cc97f8af54",
+      "id": "2af88f5d-8658-4ea7-a8f5-1548475aede0",
       "property_type": "Immeuble résidentiel",
       "location": "Lyon",
       "address": null,
@@ -133,16 +133,6 @@
     },
     "document_facts": [
       {
-        "field_name": "address",
-        "value": "12 rue de la Republique, 69000 Lyon",
-        "provenance": {
-          "source_type": "document",
-          "reference": "case_08_titre_de_propriete_surface_differente.txt",
-          "note": null,
-          "confidence": null
-        }
-      },
-      {
         "field_name": "owner",
         "value": "SCI Republique Invest",
         "provenance": {
@@ -163,8 +153,18 @@
         }
       },
       {
-        "field_name": "mortgage",
-        "value": "none",
+        "field_name": "address",
+        "value": "12 rue de la Republique, 69000 Lyon",
+        "provenance": {
+          "source_type": "document",
+          "reference": "case_08_titre_de_propriete_surface_differente.txt",
+          "note": null,
+          "confidence": null
+        }
+      },
+      {
+        "field_name": "hypotheque",
+        "value": "Aucune",
         "provenance": {
           "source_type": "document",
           "reference": "case_08_titre_de_propriete_surface_differente.txt",

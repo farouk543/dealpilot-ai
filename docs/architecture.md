@@ -1,18 +1,20 @@
 # Architecture — DealPilot AI
 
-## Vue d'ensemble
+*[Version française : architecture.fr.md](architecture.fr.md)*
 
-16 microservices FastAPI + un frontend Streamlit, orchestrés par un service `orchestrator` qui
-exécute un graphe LangGraph (10 étapes séquentielles pour l'acquisition), et proxy les appels du
-module promoteur/citoyen (faisabilité, design conversationnel, rendu IA, résumé, export).
+## Overview
+
+16 FastAPI microservices + a Streamlit frontend, orchestrated by an `orchestrator` service that
+runs a LangGraph graph (10 sequential steps for acquisition), and proxies calls for the
+developer/citizen module (feasibility, conversational design, AI rendering, summary, export).
 
 ```
                           ┌─────────────┐
-                          │  frontend   │  Streamlit (3 rôles : investisseur/promoteur/citoyen)
+                          │  frontend   │  Streamlit (3 roles: investor/developer/citizen)
                           └──────┬──────┘
                                  │ HTTP
                           ┌──────▼──────┐
-                          │ orchestrator│  LangGraph StateGraph + proxy REST
+                          │ orchestrator│  LangGraph StateGraph + REST proxy
                           └──────┬──────┘
         ┌──────────┬─────────────┼─────────────┬──────────┬───────────┐
         ▼          ▼             ▼             ▼          ▼           ▼
@@ -22,97 +24,96 @@ module promoteur/citoyen (faisabilité, design conversationnel, rendu IA, résum
       risk  →   offer  →  due-diligence      land-feasibility   design-agent
                                                     │                 │
                                           interior-render      exterior-render
-                                          (SDXL, façade 360°)  (Blender/Cycles, dans le
-                                                                dépôt mais hors parcours
-                                                                principal — voir plus bas)
+                                          (SDXL, 360° facade)  (Blender/Cycles, kept
+                                                                in the repo but off the
+                                                                main path — see below)
                                                     │
                                              summary   report
 ```
 
-Chaque service ne connaît que sa propre responsabilité ; seul l'orchestrator voit l'état complet
-d'un dossier (`DealState`).
+Each service only knows its own responsibility; only the orchestrator sees the full state of a
+deal (`DealState`).
 
-## Pourquoi des microservices (pas un monolithe)
+## Why microservices (not a monolith)
 
-Décision imposée dès le départ du projet : isoler chaque capacité métier (extraction documentaire,
-vision, marché, finance, risque, offre, due diligence) permet de :
-- Remplacer un fournisseur LLM sans toucher au reste (déjà arrivé deux fois : migration de modèles
-  Groq et Gemini dépréciés en cours de sprint, changement isolé à `document-intel`/`vision`/etc.).
-- Isoler les pannes : un service en panne ne doit pas faire tomber tout le pipeline (voir
-  `docs/eval_results.md`, cas `case_09` — trouvé en défaut puis corrigé).
-- Séparer les responsabilités de test : chaque service a sa propre suite `pytest` indépendante.
+A decision made from the project's start: isolating each business capability (document extraction,
+vision, market, finance, risk, offer, due diligence) makes it possible to:
+- Replace an LLM provider without touching the rest (already happened twice: deprecated Groq and
+  Gemini models migrated mid-sprint, an isolated change in `document-intel`/`vision`/etc.).
+- Isolate failures: a service going down must not take down the whole pipeline (see
+  `docs/eval_results.md`, `case_09` — found broken, then fixed).
+- Separate test responsibilities: each service has its own independent `pytest` suite.
 
-Coût accepté en échange : plus de complexité opérationnelle (17 conteneurs à faire tourner, un
-`docker-compose.yml` de ~350 lignes), latence réseau interne, et — jusqu'à récemment — état partagé
-minimal (voir plus bas).
+Cost accepted in exchange: more operational complexity (17 containers to run, a ~350-line
+`docker-compose.yml`), internal network latency, and — until recently — minimal shared state (see
+below).
 
-## Contrats partagés (`shared/dealpilot_shared`)
+## Shared contracts (`shared/dealpilot_shared`)
 
-Tous les services dépendent d'un seul package Python partagé contenant les modèles Pydantic des
-contrats inter-services (`PropertyRecord`, `DealState`, `RiskRegister`, `LandFeasibility`, etc.).
+Every service depends on a single shared Python package containing the Pydantic models for
+inter-service contracts (`PropertyRecord`, `DealState`, `RiskRegister`, `LandFeasibility`, etc.).
 
-**Piège découvert et documenté** : modifier ce package ne suffit pas — chaque service embarque sa
-propre copie construite au moment du build Docker. Oublier de reconstruire un service après un
-changement de contrat partagé le laisse tourner avec un schéma obsolète, silencieusement (Pydantic
-ignore les champs qu'il ne connaît pas au lieu de lever une erreur). Rencontré concrètement lors de
-l'ajout du champ `address` à `LandConstraints` : l'orchestrator ignorait le champ jusqu'à sa
-reconstruction explicite. Voir `RUNBOOK.md` pour la procédure de reconstruction complète.
+**A pitfall discovered and documented**: modifying this package isn't enough — each service bundles
+its own copy, built at Docker build time. Forgetting to rebuild a service after a shared contract
+change leaves it running with a stale schema, silently (Pydantic ignores fields it doesn't know
+about instead of raising an error). Hit in practice when adding the `address` field to
+`LandConstraints`: the orchestrator ignored the field until it was explicitly rebuilt. See
+`RUNBOOK.md` for the full rebuild procedure.
 
-### Provenance et traçabilité
+### Provenance and traceability
 
-Chaque valeur numérique du dossier (`FieldWithCandidates`) porte la liste de ses candidats avec leur
-`Provenance` (type de source, référence, confiance, note). Si deux sources donnent des valeurs
-différentes, aucune n'est silencieusement choisie : le champ est marqué `contested=true` et les deux
-restent visibles avec leur origine. C'est le mécanisme central de traçabilité du système, testé
-explicitement par les cas adverses `case_03` et `case_08` (`docs/eval_results.md`).
+Every numeric value in the deal (`FieldWithCandidates`) carries the list of its candidates with
+their `Provenance` (source type, reference, confidence, note). If two sources give different
+values, neither is silently chosen: the field is marked `contested=true` and both stay visible with
+their origin. This is the system's central traceability mechanism, explicitly tested by adversarial
+cases `case_03` and `case_08` (`docs/eval_results.md`).
 
-## Persistance
+## Persistence
 
-**État du dossier** : `AsyncSqliteSaver` (LangGraph checkpointer), fichier SQLite dans un volume
-Docker (`orchestrator_db`). Remplace un `MemorySaver` en mémoire qui perdait tous les dossiers en
-cours au moindre redémarrage du conteneur orchestrator.
+**Deal state**: `AsyncSqliteSaver` (LangGraph checkpointer), a SQLite file in a Docker volume
+(`orchestrator_db`). Replaces an in-memory `MemorySaver` that lost every deal in progress on the
+slightest orchestrator container restart.
 
-**Pas de base de données métier partagée** : chaque service reste sans état propre au-delà de son
-appel ; le seul état durable du système est celui du graphe LangGraph. C'est une simplification
-assumée pour ce sprint — un vrai produit multi-utilisateurs voudrait une base Postgres partagée avec
-un historique interrogeable indépendamment du graphe d'exécution (voir `docs/iteration_plan.md`).
+**No shared business database**: each service remains stateless beyond its own call; the system's
+only durable state is the LangGraph graph's. This is an assumed simplification for this sprint — a
+real multi-user product would want a shared Postgres database with a history queryable
+independently of the execution graph (see `docs/iteration_plan.md`).
 
-## Fiabilité
+## Reliability
 
-- **Retry avec backoff** (`shared/dealpilot_shared/http_retry.py`) sur tous les appels vers des APIs
-  tierces (Groq, Gemini, DVF, BAN, Apicarto) : jusqu'à 2 tentatives supplémentaires avant d'abandonner.
-- **Dégradation gracieuse systématique** : chaque nœud du graphe orchestrator capture les échecs de
-  son service en aval et les transforme en un fait d'erreur visible (`*_error`) plutôt que de
-  laisser l'exception remonter. Voir `docs/eval_results.md` pour la découverte et la correction du
-  point qui manquait initialement (`market`).
-- **Verrou GPU inter-services** (`shared/dealpilot_shared/gpu_lock.py`) : un seul GPU disponible,
-  partagé entre `interior-render` (SDXL) et `exterior-render` (Blender/Cycles) — deux conteneurs
-  séparés qu'un simple `threading.Lock` local ne peut pas coordonner. Un verrou de fichier
-  (`flock`) sur un volume Docker monté dans les deux services fait office de mutex cross-process.
-  Ajouté après qu'un test de contention réel a montré un ralentissement mutuel de ~2× sans lui
-  (VRAM à moins de 300 Mo de la limite de la carte) ; `interior-render` garde en plus son propre
-  `threading.Lock` pour les requêtes concurrentes au sein du même processus.
-- **Logging structuré avec ID de corrélation** (`shared/dealpilot_shared/logging_utils.py`) : chaque
-  dossier (`deal_id`) est propagé en en-tête HTTP (`X-Correlation-ID`) à travers tous les appels
-  inter-services, permettant de retrouver tout le parcours d'un dossier dans les logs combinés des
-  17 services.
+- **Retry with backoff** (`shared/dealpilot_shared/http_retry.py`) on every call to third-party APIs
+  (Groq, Gemini, DVF, BAN, Apicarto): up to 2 additional attempts before giving up.
+- **Systematic graceful degradation**: every node in the orchestrator graph catches failures from
+  its downstream service and turns them into a visible error fact (`*_error`) rather than letting
+  the exception propagate. See `docs/eval_results.md` for the discovery and fix of the one point
+  that was initially missing it (`market`).
+- **Cross-service GPU lock** (`shared/dealpilot_shared/gpu_lock.py`): a single GPU available, shared
+  between `interior-render` (SDXL) and `exterior-render` (Blender/Cycles) — two separate containers
+  a plain local `threading.Lock` cannot coordinate. A file lock (`flock`) on a Docker volume mounted
+  into both services acts as a cross-process mutex. Added after a real contention test showed a ~2x
+  mutual slowdown without it (VRAM within 300MB of the card's limit); `interior-render` also keeps
+  its own `threading.Lock` for concurrent requests within the same process.
+- **Structured logging with a correlation ID** (`shared/dealpilot_shared/logging_utils.py`): every
+  deal (`deal_id`) is propagated as an HTTP header (`X-Correlation-ID`) across every inter-service
+  call, making it possible to trace a deal's entire path through the combined logs of the 17
+  services.
 
-## Sources de données externes
+## External data sources
 
-| Source | Usage | Pourquoi celle-là |
+| Source | Usage | Why this one |
 |---|---|---|
-| Groq (`openai/gpt-oss-120b`) | Extraction documentaire, résumé, agent de conception, analyse d'emplacement | LLM rapide et peu coûteux pour de l'extraction structurée |
-| Google Gemini (`gemini-3.6-flash`) | Analyse visuelle | Groq n'a pas de modèle vision au moment du sprint |
-| DVF (`files.data.gouv.fr/geo-dvf`) | Comparables de marché | Données de transactions réelles, open data officiel — pas de scraping d'annonces (non-goal explicite) |
-| BAN (`api-adresse.data.gouv.fr`) | Géocodage d'adresse | Base d'adresses nationale officielle, gratuite |
-| Geoportail de l'Urbanisme / Apicarto (`apicarto.ign.fr`) | Zone PLU réelle d'une parcelle | Registre officiel — donne l'identité de la zone, pas les règles chiffrées (le registre ne les expose pas nationalement en format machine-lisible) |
-| Overpass API (OpenStreetMap) | Points d'intérêt du quartier | Open data, gratuit, couverture dense en France |
-| Stable Diffusion XL (auto-hébergé) | Rendu photoréaliste intérieur/jardin/façade 360° | Gratuit et illimité une fois le modèle téléchargé, contrairement aux APIs payantes (Replicate testé puis abandonné pour cette raison) |
-| Blender/Cycles (auto-hébergé, `exterior-render`) | Maquette 3D mesurable animée par phase de construction | Piste explorée pour un volume géométriquement exact ; conservée dans le dépôt mais retirée du parcours principal après comparaison visuelle avec le rendu SDXL — voir `docs/case_study.md` |
+| Groq (`openai/gpt-oss-120b`) | Document extraction, summary, design agent, location analysis | Fast, low-cost LLM for structured extraction |
+| Google Gemini (`gemini-3.6-flash`) | Visual analysis | Groq had no vision-capable model at the time of the sprint |
+| DVF (`files.data.gouv.fr/geo-dvf`) | Market comparables | Real transaction data, official open data — no listing scraping (explicit non-goal) |
+| BAN (`api-adresse.data.gouv.fr`) | Address geocoding | Official national address database, free |
+| Geoportail de l'Urbanisme / Apicarto (`apicarto.ign.fr`) | A parcel's real zoning district | Official registry — gives the zone's identity, not the numeric rules (the registry does not expose those nationally in machine-readable form) |
+| Overpass API (OpenStreetMap) | Neighborhood points of interest | Open data, free, dense coverage in France |
+| Stable Diffusion XL (self-hosted) | Photorealistic interior/garden/360° facade rendering | Free and unlimited once the model is downloaded, unlike paid APIs (Replicate tested then dropped for this reason) |
+| Blender/Cycles (self-hosted, `exterior-render`) | Measurable 3D massing model animated by construction phase | An avenue explored for a geometrically exact volume; kept in the repo but removed from the main flow after a visual comparison with the SDXL rendering — see `docs/case_study.md` |
 
-## Non-goals techniques (rappel)
+## Technical non-goals (recap)
 
-Voir `docs/case_study.md` pour la liste complète des non-goals produit. Techniquement, cela se
-traduit par : `listing_url` n'est jamais récupéré en direct (stocké comme simple référence de
-provenance), aucune valorisation n'est présentée comme garantie, et le zonage réel n'est jamais
-traduit en règles chiffrées automatiques.
+See `docs/case_study.md` for the full list of product non-goals. Technically, this means:
+`listing_url` is never fetched live (stored only as a provenance reference), no valuation is ever
+presented as guaranteed, and the real zoning district is never automatically translated into
+numeric rules.

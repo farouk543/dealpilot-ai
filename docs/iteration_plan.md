@@ -1,97 +1,99 @@
-# Plan d'itération — 2 prochaines semaines
+# Iteration Plan — Next 2 Weeks
 
-Ce plan part de l'état actuel (système fonctionnel, 17 microservices, 11 cas synthétiques évalués,
-voir `docs/eval_results.md`) et priorise ce qui a le plus d'impact avant une exposition à de vrais
-utilisateurs.
+*[Version française : iteration_plan.fr.md](iteration_plan.fr.md)*
 
-## Priorité 1 — Combler la limitation connue
+This plan starts from the current state (functional system, 17 microservices, 11 synthetic cases
+evaluated, see `docs/eval_results.md`) and prioritizes what has the most impact before exposure to
+real users.
 
-**Règle de plausibilité du loyer vs marché** (`case_06_adversarial_abnormal_rent`, documenté dans
-`docs/eval_results.md`). Aujourd'hui, `services/risk/app/rules.py` ne compare jamais le loyer déclaré
-à une référence de marché : un loyer irréaliste (trop haut ou trop bas) passe sans avertissement,
-alors que le service `market` calcule déjà un prix au m² médian.
+## Priority 1 — Close the known gap
 
-- Ajouter une règle qui compare `market_rent_per_m2` (à créer, calculé depuis DVF ou une source
-  locative complémentaire) au loyer déclaré, avec un seuil d'écart (ex. ±25%) déclenchant un risque
-  de sévérité moyenne.
-- Écrire d'abord le cas de test adversarial correspondant en version "doit maintenant échouer si non
-  corrigé" pour éviter une fausse victoire.
-- Effort estimé : 2-3 jours (le plus dur est de trouver une source fiable de loyers de marché en
-  open data français — DVF ne couvre que les ventes, pas les locations).
+**Rent-vs-market plausibility rule** (`case_06_adversarial_abnormal_rent`, documented in
+`docs/eval_results.md`). Today, `services/risk/app/rules.py` never compares the declared rent to a
+market reference: an unrealistic rent (too high or too low) passes with no warning, even though the
+`market` service already computes a median price per m².
 
-## Priorité 2 — Essai utilisateur réel chronométré
+- Add a rule comparing `market_rent_per_m2` (to be created, computed from DVF or a complementary
+  rental data source) to the declared rent, with a deviation threshold (e.g. ±25%) triggering a
+  medium-severity risk.
+- Write the corresponding adversarial test case first, in its "must now fail if not fixed" form, to
+  avoid a false victory.
+- Estimated effort: 2-3 days (the hardest part is finding a reliable market-rent source in French
+  open data — DVF only covers sales, not rentals).
 
-Le rapport d'évaluation le signale explicitement : la comparaison baseline vs système n'est
-aujourd'hui qu'une estimation qualitative (voir `docs/eval_results.md`, section "Baseline vs
-système"), faute d'accès à un vrai investisseur pendant le sprint.
+## Priority 2 — Real timed user trial
 
-- Recruter 2-3 investisseurs immobiliers réels (réseaux professionnels, forums spécialisés).
-- Leur faire analyser un même dossier réel (anonymisé) une fois manuellement (chronométré), une fois
-  avec DealPilot AI.
-- Mesurer : temps réel, nombre de risques identifiés dans chaque cas, confiance déclarée dans la
-  décision finale.
-- Effort estimé : 1 semaine (recrutement + sessions + synthèse).
+The evaluation report explicitly flags it: the baseline-vs-system comparison today is only a
+qualitative estimate (see `docs/eval_results.md`, "Baseline vs system" section), for lack of access
+to a real investor during the sprint.
 
-## Priorité 3 — Base de données partagée et historique interrogeable
+- Recruit 2-3 real real-estate investors (professional networks, specialized forums).
+- Have them analyze the same real (anonymized) deal once manually (timed), once with DealPilot AI.
+- Measure: actual time, number of risks identified in each case, stated confidence in the final
+  decision.
+- Estimated effort: 1 week (recruiting + sessions + synthesis).
 
-Aujourd'hui, le seul état durable est le checkpointer LangGraph (`docs/architecture.md`, section
-Persistance) — correct pour la reprise après redémarrage, mais impossible à interroger
-indépendamment ("montre-moi tous les dossiers avec un risque élevé non résolu").
+## Priority 3 — Shared, independently queryable database
 
-- Introduire Postgres partagé, une table par service (pas de couplage de schéma), alimentée en
-  parallèle du graphe LangGraph plutôt qu'à sa place.
-- Premier cas d'usage concret : un tableau de bord multi-dossiers pour l'investisseur (au-delà de la
-  comparaison ponctuelle déjà livrée).
-- Effort estimé : 3-4 jours.
+Today, the only durable state is the LangGraph checkpointer (`docs/architecture.md`, Persistence
+section) — correct for resuming after a restart, but impossible to query independently ("show me
+every deal with an unresolved high-severity risk").
 
-## Priorité 4 — Renforcer l'évaluation continue
+- Introduce a shared Postgres database, one table per service (no schema coupling), fed in parallel
+  with the LangGraph graph rather than replacing it.
+- First concrete use case: a multi-deal dashboard for the investor (beyond the point-in-time
+  comparison already shipped).
+- Estimated effort: 3-4 days.
 
-- Étendre `eval/run_eval.py` pour tourner en CI (GitHub Actions) à chaque changement touchant
-  `services/` ou `shared/`, pas seulement à la demande.
-- Ajouter des cas synthétiques ciblant le module promoteur/citoyen (aujourd'hui, les 11 cas ne
-  couvrent que le flux investisseur) : zone agricole refusant tout permis, terrain en zone AU non
-  ouverte, terrain sans réseaux.
-- Effort estimé : 2 jours.
+## Priority 4 — Strengthen continuous evaluation
 
-## Priorité 5 — Fiabilité GPU en production
+- Extend `eval/run_eval.py` to run in CI (GitHub Actions) on every change touching `services/` or
+  `shared/`, not just on demand.
+- Add synthetic cases targeting the developer/citizen module (today, the 11 cases only cover the
+  investor flow): agricultural zone refusing any permit, land in an unopened AU zone, land with no
+  utility hookups.
+- Estimated effort: 2 days.
 
-Le verrou GPU inter-services (`flock`, `docs/architecture.md`) sérialise correctement deux services
-sur un seul GPU, mais suppose toujours un seul GPU physique. Pour plusieurs utilisateurs simultanés
-en environnement réel :
-- Ajouter une file d'attente visible côté frontend (position dans la file, temps d'attente estimé)
-  plutôt qu'un blocage silencieux.
-- Évaluer un second GPU ou un provider managé (Replicate/Modal) pour absorber les pics, en gardant le
-  mode auto-hébergé comme option par défaut (déjà écarté une fois pour coût, voir
-  `docs/architecture.md`, mais viable en scale-out ponctuel).
-- Effort estimé : 2-3 jours.
+## Priority 5 — GPU reliability in production
 
-## Priorité 6 — Couverture de tests unitaires manquante
+The cross-service GPU lock (`flock`, `docs/architecture.md`) correctly serializes two services on
+one GPU, but still assumes a single physical GPU. For several concurrent users in a real
+environment:
+- Add a visible queue on the frontend (position in queue, estimated wait time) instead of a silent
+  block.
+- Evaluate a second GPU or a managed provider (Replicate/Modal) to absorb peaks, keeping the
+  self-hosted mode as the default option (already dropped once for cost, see
+  `docs/architecture.md`, but viable for occasional scale-out).
+- Estimated effort: 2-3 days.
 
-Trouvé lors de l'audit global du système : `intake`, `document-intel`, `vision`, `market`,
-`design-agent` et `exterior-render` n'ont aucun test unitaire (6 services sur 17). Certains de ces
-services (`document-intel`, `design-agent`) instanciaient en plus leur client Groq au chargement du
-module, rendant impossible le test de la moindre logique pure sans clé API réelle — déjà corrigé
-pour 4 services par un chargement paresseux du client, à généraliser.
+## Priority 6 — Missing unit test coverage
 
-- Écrire des tests pour la logique pure de chaque service (parsing, validation, construction de
-  requêtes) sans dépendre d'appels réseau réels — suivre le modèle déjà en place dans
-  `location-intel/tests/test_osm.py` (teste `_build_query`/`aggregate_categories`, pas l'appel HTTP).
-- `exterior-render` (bpy/Blender) reste difficile à tester unitairement de façon conventionnelle —
-  envisager des tests de fumée automatisés plutôt que du pytest classique.
-- Effort estimé : 2-3 jours.
+Found during the global system audit: `intake`, `document-intel`, `vision`, `market`,
+`design-agent`, and `exterior-render` have no unit tests at all (6 services out of 17). Some of
+these services (`document-intel`, `design-agent`) also instantiated their Groq client at module
+load time, making it impossible to test even pure logic without a real API key — already fixed for
+4 services via lazy client loading, to be generalized.
 
-## Ce qui n'est délibérément pas dans ce plan
+- Write tests for each service's pure logic (parsing, validation, request construction) without
+  depending on real network calls — follow the pattern already in place in
+  `location-intel/tests/test_osm.py` (tests `_build_query`/`aggregate_categories`, not the HTTP
+  call itself).
+- `exterior-render` (bpy/Blender) remains hard to unit-test conventionally — consider automated
+  smoke tests rather than classic pytest.
+- Estimated effort: 2-3 days.
 
-- Décision d'achat automatisée, conseil juridique engageant, certification structurelle, négociation
-  automatisée : restent des non-goals produit (`docs/case_study.md`), pas des limitations techniques
-  temporaires.
-- Scraping direct de portails d'annonces : risque CGU non réévalué, DVF reste la source de vérité.
+## What is deliberately not in this plan
 
-## Métriques à suivre pendant ces deux semaines
+- Automated purchase decisions, binding legal advice, structural certification, automated
+  negotiation: remain product non-goals (`docs/case_study.md`), not temporary technical
+  limitations.
+- Direct scraping of listing portals: ToS risk not re-evaluated, DVF stays the source of truth.
 
-- **Adoption** : nombre de dossiers réels soumis par les investisseurs testeurs (cible : ≥ 5 dossiers
-  chacun sur la période).
-- **Qualité** : taux de vérifications passées dans `eval/run_eval.py` (maintenir 100% hors
-  limitations documentées) après chaque changement.
-- **Confiance utilisateur** : note déclarée (1-5) sur "je ferais confiance à ce dossier pour appuyer
-  une offre réelle", recueillie après chaque essai utilisateur de la Priorité 2.
+## Metrics to track over these two weeks
+
+- **Adoption**: number of real deals submitted by testing investors (target: ≥ 5 deals each over
+  the period).
+- **Quality**: share of checks passing in `eval/run_eval.py` (maintain 100% outside documented
+  limitations) after each change.
+- **User trust**: stated rating (1-5) on "I would trust this file to support a real offer",
+  collected after each Priority 2 user trial.

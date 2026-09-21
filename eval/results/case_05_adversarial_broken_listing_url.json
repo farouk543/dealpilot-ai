@@ -1,11 +1,11 @@
 {
   "status": 200,
   "result": {
-    "deal_id": "629f61af-3b48-4d63-9f30-e13168e2dcd2",
-    "created_at": "2026-09-21T08:44:59.027021Z",
+    "deal_id": "d79616d2-65cf-4e7f-accd-dd7e07be3f6c",
+    "created_at": "2026-09-21T09:43:18.355009Z",
     "current_step": "final_file",
     "property": {
-      "id": "47e31351-a502-4c90-a741-ceccff53791d",
+      "id": "53f80311-2e9c-4003-b419-8287fd53afaa",
       "property_type": "Immeuble résidentiel",
       "location": "Lyon",
       "address": null,
@@ -193,12 +193,142 @@
         }
       },
       {
-        "field_name": "location_error",
-        "value": "donnees OpenStreetMap indisponibles (panne ou limite de requetes Overpass)",
+        "field_name": "location_count:commerces",
+        "value": "477",
         "provenance": {
           "source_type": "external_source",
-          "reference": "Overpass API",
+          "reference": "OpenStreetMap/Overpass, rayon 400m",
           "note": null,
+          "confidence": null
+        }
+      },
+      {
+        "field_name": "location_count:restauration",
+        "value": "89",
+        "provenance": {
+          "source_type": "external_source",
+          "reference": "OpenStreetMap/Overpass, rayon 400m",
+          "note": null,
+          "confidence": null
+        }
+      },
+      {
+        "field_name": "location_count:sante",
+        "value": "5",
+        "provenance": {
+          "source_type": "external_source",
+          "reference": "OpenStreetMap/Overpass, rayon 400m",
+          "note": null,
+          "confidence": null
+        }
+      },
+      {
+        "field_name": "location_count:education",
+        "value": "2",
+        "provenance": {
+          "source_type": "external_source",
+          "reference": "OpenStreetMap/Overpass, rayon 400m",
+          "note": null,
+          "confidence": null
+        }
+      },
+      {
+        "field_name": "location_count:services_bancaires",
+        "value": "8",
+        "provenance": {
+          "source_type": "external_source",
+          "reference": "OpenStreetMap/Overpass, rayon 400m",
+          "note": null,
+          "confidence": null
+        }
+      },
+      {
+        "field_name": "location_count:transport",
+        "value": "23",
+        "provenance": {
+          "source_type": "external_source",
+          "reference": "OpenStreetMap/Overpass, rayon 400m",
+          "note": null,
+          "confidence": null
+        }
+      },
+      {
+        "field_name": "location_vibrancy_index",
+        "value": "100",
+        "provenance": {
+          "source_type": "external_source",
+          "reference": "OpenStreetMap/Overpass, rayon 400m",
+          "note": null,
+          "confidence": null
+        }
+      },
+      {
+        "field_name": "location_context",
+        "value": "Le secteur étudié autour de l’immeuble résidentiel à Lyon présente une densité commerciale exceptionnelle : 477 commerces et 89 établissements de restauration dans un rayon de 400 m. Cette offre très riche attire principalement des locataires actifs (jeunes cadres, travailleurs du secteur tertiaire, étudiants) qui recherchent la proximité de services du quotidien et de lieux de vie. Le nombre élevé de points de transport (23) assure une bonne desserte, renforçant l’attractivité locative pour des profils mobiles. En revanche, la présence d’établissements d’éducation (seulement 2) et de santé (5) reste très limitée, ce qui peut décourager les familles avec enfants ou les locataires recherchant un accès facile à des soins de proximité. En somme, le quartier se caractérise comme un pôle urbain dynamique, favorable à la location de studios et T2 à forte rotation, mais moins adapté aux familles recherchant un environnement scolaire et sanitaire complet.",
+        "provenance": {
+          "source_type": "external_source",
+          "reference": "Analyse LLM sur donnees OSM",
+          "note": null,
+          "confidence": null
+        }
+      },
+      {
+        "field_name": "location_opportunity:commercial",
+        "value": "Création d’un commerce de santé (pharmacie, centre de soins dentaires ou clinique de médecine générale) pour combler le déséquilibre entre le nombre très élevé de commerces (477) et le faible nombre d’établissements de santé (5).",
+        "provenance": {
+          "source_type": "external_source",
+          "reference": "Analyse LLM sur donnees OSM",
+          "note": null,
+          "confidence": 0.82
+        }
+      },
+      {
+        "field_name": "location_opportunity:commercial",
+        "value": "Aménagement d’un espace de coworking ou de bureaux partagés, ciblant les professionnels actifs dans le quartier, profitant de la forte densité de restauration (89) et de la bonne desserte transport (23).",
+        "provenance": {
+          "source_type": "external_source",
+          "reference": "Analyse LLM sur donnees OSM",
+          "note": null,
+          "confidence": 0.65
+        }
+      },
+      {
+        "field_name": "location_risk",
+        "value": "Faible offre éducative (seulement 2 établissements) pouvant limiter l’attractivité pour les familles avec enfants.",
+        "provenance": {
+          "source_type": "external_source",
+          "reference": "Analyse LLM sur donnees OSM",
+          "note": "severity:moyen",
+          "confidence": null
+        }
+      },
+      {
+        "field_name": "location_risk",
+        "value": "Nombre limité de services de santé (5) pouvant être perçu comme un manque de commodité pour les résidents.",
+        "provenance": {
+          "source_type": "external_source",
+          "reference": "Analyse LLM sur donnees OSM",
+          "note": "severity:moyen",
+          "confidence": null
+        }
+      },
+      {
+        "field_name": "location_risk",
+        "value": "Intensité élevée de commerces et de restaurants pouvant générer du bruit et de la circulation, affectant le confort des locataires.",
+        "provenance": {
+          "source_type": "external_source",
+          "reference": "Analyse LLM sur donnees OSM",
+          "note": "severity:moyen",
+          "confidence": null
+        }
+      },
+      {
+        "field_name": "location_risk",
+        "value": "Concurrence importante entre les commerces existants, rendant difficile le lancement d’un nouveau commerce non différencié.",
+        "provenance": {
+          "source_type": "external_source",
+          "reference": "Analyse LLM sur donnees OSM",
+          "note": "severity:faible",
           "confidence": null
         }
       }
@@ -302,14 +432,44 @@
           "source_reference": "documents_missing"
         },
         {
-          "category": "technique",
-          "title": "Echec d'analyse automatisee (location_error)",
+          "category": "marche",
+          "title": "Risque lie a l'emplacement",
           "severity": "moyen",
-          "evidence": "donnees OpenStreetMap indisponibles (panne ou limite de requetes Overpass)",
-          "impact": "Cette source n'a pas pu etre analysee automatiquement ; l'information peut etre incomplete.",
+          "evidence": "Faible offre éducative (seulement 2 établissements) pouvant limiter l’attractivité pour les familles avec enfants.",
+          "impact": "Peut affecter l'attractivite locative ou la valorisation du bien.",
           "owner": "investisseur",
-          "next_action": "Reessayer l'analyse ou traiter cette source manuellement.",
-          "source_reference": "Overpass API"
+          "next_action": "Prendre en compte ce facteur d'emplacement dans la decision finale.",
+          "source_reference": "Analyse LLM sur donnees OSM"
+        },
+        {
+          "category": "marche",
+          "title": "Risque lie a l'emplacement",
+          "severity": "moyen",
+          "evidence": "Nombre limité de services de santé (5) pouvant être perçu comme un manque de commodité pour les résidents.",
+          "impact": "Peut affecter l'attractivite locative ou la valorisation du bien.",
+          "owner": "investisseur",
+          "next_action": "Prendre en compte ce facteur d'emplacement dans la decision finale.",
+          "source_reference": "Analyse LLM sur donnees OSM"
+        },
+        {
+          "category": "marche",
+          "title": "Risque lie a l'emplacement",
+          "severity": "moyen",
+          "evidence": "Intensité élevée de commerces et de restaurants pouvant générer du bruit et de la circulation, affectant le confort des locataires.",
+          "impact": "Peut affecter l'attractivite locative ou la valorisation du bien.",
+          "owner": "investisseur",
+          "next_action": "Prendre en compte ce facteur d'emplacement dans la decision finale.",
+          "source_reference": "Analyse LLM sur donnees OSM"
+        },
+        {
+          "category": "marche",
+          "title": "Risque lie a l'emplacement",
+          "severity": "faible",
+          "evidence": "Concurrence importante entre les commerces existants, rendant difficile le lancement d’un nouveau commerce non différencié.",
+          "impact": "Peut affecter l'attractivite locative ou la valorisation du bien.",
+          "owner": "investisseur",
+          "next_action": "Prendre en compte ce facteur d'emplacement dans la decision finale.",
+          "source_reference": "Analyse LLM sur donnees OSM"
         },
         {
           "category": "financier",
@@ -372,10 +532,31 @@
         },
         {
           "task_type": "question_ouverte",
-          "description": "Reessayer l'analyse ou traiter cette source manuellement.",
+          "description": "Prendre en compte ce facteur d'emplacement dans la decision finale.",
           "status": "ouvert",
           "severity_driver": "moyen",
-          "linked_risk_title": "Echec d'analyse automatisee (location_error)"
+          "linked_risk_title": "Risque lie a l'emplacement"
+        },
+        {
+          "task_type": "question_ouverte",
+          "description": "Prendre en compte ce facteur d'emplacement dans la decision finale.",
+          "status": "ouvert",
+          "severity_driver": "moyen",
+          "linked_risk_title": "Risque lie a l'emplacement"
+        },
+        {
+          "task_type": "question_ouverte",
+          "description": "Prendre en compte ce facteur d'emplacement dans la decision finale.",
+          "status": "ouvert",
+          "severity_driver": "moyen",
+          "linked_risk_title": "Risque lie a l'emplacement"
+        },
+        {
+          "task_type": "question_ouverte",
+          "description": "Prendre en compte ce facteur d'emplacement dans la decision finale.",
+          "status": "ouvert",
+          "severity_driver": "faible",
+          "linked_risk_title": "Risque lie a l'emplacement"
         },
         {
           "task_type": "validation_professionnelle",
@@ -401,7 +582,7 @@
       ],
       "unresolved_high_risk_tasks": 0,
       "decision_ready": true,
-      "audit_trail_note": "6 tache(s) de due diligence generee(s) a partir de 6 risque(s) identifie(s). Chaque tache reste reliee au risque (et donc a la source) qui l'a declenchee via linked_risk_title, formant la piste d'audit de l'annonce a la decision."
+      "audit_trail_note": "9 tache(s) de due diligence generee(s) a partir de 9 risque(s) identifie(s). Chaque tache reste reliee au risque (et donc a la source) qui l'a declenchee via linked_risk_title, formant la piste d'audit de l'annonce a la decision."
     },
     "pending_approval": null,
     "approval_history": []

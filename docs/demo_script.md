@@ -1,77 +1,79 @@
-# Script de démo — 5 minutes
+# Demo Script — 5 minutes
 
-Destiné à l'enregistrement d'une vidéo de présentation. Chronométrage indicatif entre parenthèses.
+*[Version française : demo_script.fr.md](demo_script.fr.md)*
 
-## 1. Le problème et la baseline (0:00 – 0:45)
+For recording a presentation video. Timings below are indicative. The live system's own UI and
+generated content (risk labels, summaries, etc.) are in French — that matches the target user
+described in `docs/case_study.md` (a French rental-property investor); narrate over it in English.
 
-> "Un investisseur immobilier qui trouve un immeuble à acheter passe aujourd'hui plusieurs heures,
-> réparties sur plusieurs jours, à lire manuellement des documents PDF, comparer des loyers, chercher
-> des prix comparables, et modéliser un cash-flow dans Excel — sans filet contre l'erreur humaine ou
-> l'oubli. [Montrer `docs/case_study.md`, le tableau des 10 étapes manuelles à l'écran quelques
-> secondes.] DealPilot AI transforme ça en un dossier structuré et tracé, en quelques minutes,
-> sans jamais décider à la place de l'investisseur."
+## 1. The problem and the baseline (0:00 – 0:45)
 
-## 2. Flux en direct sur un cas réel (0:45 – 3:00)
+> "A real-estate investor who finds a building to buy today spends several hours, spread over
+> several days, manually reading PDF documents, comparing rents, researching comparable prices, and
+> modeling cash flow in Excel — with no safety net against human error or oversight. [Show
+> `docs/case_study.md`, the 10-step manual workflow table, on screen for a few seconds.] DealPilot
+> AI turns that into a structured, traceable deal file in minutes, without ever deciding on the
+> investor's behalf."
 
-Utiliser le cas synthétique `case_01_normal_complete` (ou un dossier équivalent rempli en direct) :
+## 2. Live walkthrough on a real case (0:45 – 3:00)
 
-1. Ouvrir [http://localhost:8501](http://localhost:8501), rôle **Investisseur**.
-2. Remplir le formulaire : annonce, prix, loyer, upload des documents (`etat_locatif`,
-   `titre_de_propriete`) et d'une photo.
-3. Soumettre — montrer le dossier progresser à travers les 10 étapes (documents, vision, marché,
-   finance, risques, offre, due diligence).
-4. Une fois terminé, montrer :
-   - Le **registre de risques** avec sévérité et preuve associée.
-   - La **stratégie d'offre** (prix cible, prix max, conditions).
-   - Un champ **contesté** si présent (ex. loyer incohérent entre deux sources) — souligner que le
-     système ne choisit jamais silencieusement une valeur, il montre les deux avec leur origine.
-5. Cliquer sur **"Résumé en langage simple"** — montrer le résumé en français courant.
-6. Simuler une **contre-offre** — montrer la comparaison avant/après.
-7. Exporter en **PDF** — ouvrir le fichier généré brièvement.
+Use the synthetic case `case_01_normal_complete` (or an equivalent deal filled in live):
 
-## 3. UX non-développeur (3:00 – 3:30)
+1. Open [http://localhost:8501](http://localhost:8501), **Investor** role.
+2. Fill in the form: listing, price, rent, upload documents (`etat_locatif`,
+   `titre_de_propriete`) and a photo.
+3. Submit — show the deal progressing through the 10 steps (documents, vision, market, finance,
+   risks, offer, due diligence).
+4. Once complete, show:
+   - The **risk register** with severity and its supporting evidence.
+   - The **offer strategy** (target price, max price, conditions).
+   - A **contested** field if present (e.g. rent inconsistent between two sources) — highlight that
+     the system never silently picks a value, it shows both with their origin.
+5. Click **"Plain-language summary"** — show the summary (in French, matching the target user).
+6. Simulate a **counter-offer** — show the before/after comparison.
+7. Export to **PDF** — briefly open the generated file.
 
-> "Tout ceci tourne sans ligne de commande pour l'utilisateur final — trois étapes d'installation
-> Docker documentées dans `README.md`, puis tout se passe dans le navigateur. Les trois rôles
-> (investisseur, promoteur, citoyen) ont chacun leur propre parcours adapté à leur besoin, pas une
-> interface technique générique."
+## 3. Non-developer UX (3:00 – 3:30)
 
-Optionnel si le temps le permet : basculer rapidement sur le rôle **Promoteur/Citoyen**, montrer la
-faisabilité de terrain avec la vraie zone PLU récupérée depuis une adresse, générer la **vue à 360°**
-photoréaliste du bâtiment (8 angles, IA, glisser pour tourner), puis un rendu intérieur cohérent
-visuellement avec cette façade (même "identité" de bâtiment grâce à un seed partagé).
+> "All of this runs with no command line for the end user — a 3-step Docker install documented in
+> `README.md`, then everything happens in the browser. The three roles (investor, developer,
+> citizen) each get their own workflow suited to their need, not a generic technical interface."
 
-## 4. Évaluation et gestion des pannes (3:30 – 4:30)
+Optional if time allows: switch briefly to the **Developer/Citizen** role, show land feasibility
+with the real zoning district fetched from an address, show the pre-generated **360° view** (8
+angles, AI, drag to rotate), then an interior render kept visually consistent with that facade
+(same building "identity" via a shared random seed).
 
-> "Le système a été testé contre 11 cas synthétiques, dont 9 scénarios adverses représentant les
-> modes de panne identifiés dès le départ : documents contradictoires, documents manquants, loyer
-> anormal, défaut visuel ambigu, panne de service externe, financement non viable, tentative
-> d'injection de prompt dans un document. [Montrer `docs/eval_results.md`, le tableau de résumé.]
-> 29 vérifications passées, 0 échec, une limitation connue documentée plutôt que cachée."
+## 4. Evaluation and failure handling (3:30 – 4:30)
 
-> "Un exemple concret : le test de panne du service de marché a révélé un vrai bug — le pipeline
-> plantait entièrement au lieu de continuer sans les comparables. Corrigé, puis le même filet de
-> sécurité a été ajouté préventivement sur 6 autres points du système qui avaient la même faiblesse
-> non testée. [Montrer la section 'Ce que cette passe de tests a trouvé et corrigé'.]"
+> "The system was tested against 11 synthetic cases, 9 of them adversarial, matching the failure
+> modes identified from the start: contradictory documents, missing documents, abnormal rent,
+> ambiguous visual defect, external service outage, unprofitable financing, a prompt-injection
+> attempt inside a document. [Show `docs/eval_results.md`, the English summary at the top.] 29
+> checks passed, 0 failed, one known limitation documented rather than hidden."
 
-## 5. Résultats et limite principale (4:30 – 5:00)
+> "One concrete example: the market-service outage test revealed a real bug — the pipeline crashed
+> entirely instead of continuing without comparables. Fixed, then the same safety net was added
+> preemptively to 6 other points in the system with the same untested weakness. [Show the 'what this
+> test pass found and fixed' section.]"
 
-> "Ce système ne remplace jamais le jugement de l'investisseur — il ne décide jamais d'acheter, ne
-> donne pas de conseil juridique engageant, et ne certifie aucun état structurel. La limite
-> actuelle la plus importante : aucune règle ne détecte encore un loyer anormalement élevé ou bas par
-> rapport au marché — documentée dans `docs/eval_results.md` et planifiée comme première priorité
-> dans `docs/iteration_plan.md`. Un essai réel avec de vrais investisseurs, chronométré contre leur
-> flux manuel actuel, est la seconde priorité pour remplacer l'estimation qualitative de gain de temps
-> par une mesure réelle."
+## 5. Results and the main limitation (4:30 – 5:00)
 
-## Notes pour l'enregistrement
+> "This system never replaces the investor's judgment — it never decides to buy, never gives
+> binding legal advice, and never certifies structural condition. The most important current
+> limitation: no rule yet detects a rent that's abnormally high or low relative to the market —
+> documented in `docs/eval_results.md` and planned as the top priority in `docs/iteration_plan.md`.
+> A real trial with real investors, timed against their actual manual workflow, is the second
+> priority, to replace the qualitative time-savings estimate with a real measurement."
 
-- Préparer les conteneurs à l'avance (`docker compose up -d`, attendre que tout soit `healthy`) pour
-  ne pas perdre de temps de démo sur un démarrage à froid.
-- Le rendu SDXL (intérieur/façade unique) prend ~30-60s — si démontré, le lancer puis continuer à
-  parler pendant la génération plutôt que d'attendre en silence.
-- La **vue à 360°** (8 angles) prend ~5 minutes — trop long pour la démo en direct. La **pré-générer
-  avant l'enregistrement** pour le même bien/style que celui présenté, et juste montrer/manipuler le
-  résultat déjà prêt (glisser pour tourner) pendant la démo.
-- Avoir `docs/eval_results.md` et `docs/case_study.md` déjà ouverts dans des onglets pour les montrer
-  sans chercher.
+## Recording notes
+
+- Start the containers ahead of time (`docker compose up -d`, wait until everything is `healthy`)
+  so demo time isn't lost on a cold start.
+- SDXL rendering (a single interior/facade image) takes ~30-60s — if demonstrated, start it, then
+  keep talking during generation rather than waiting in silence.
+- The **360° view** (8 angles) takes ~5 minutes — too long for a live demo. **Pre-generate it before
+  recording** for the same property/style shown in the demo, and just show/manipulate the
+  already-ready result (drag to rotate) during the recording.
+- Have `docs/eval_results.md` and `docs/case_study.md` already open in tabs so you don't have to
+  search for them on camera.

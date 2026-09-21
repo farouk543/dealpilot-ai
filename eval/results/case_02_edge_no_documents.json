@@ -1,11 +1,11 @@
 {
   "status": 200,
   "result": {
-    "deal_id": "3d973ad1-bfe5-4835-925e-fd0d1ef2eefc",
-    "created_at": "2026-09-21T08:43:24.777770Z",
+    "deal_id": "f715c709-57a4-4543-abbb-a2d2cdc8476e",
+    "created_at": "2026-09-21T09:42:25.923830Z",
     "current_step": "final_file",
     "property": {
-      "id": "da6a8047-9df5-4818-891b-db4e9a10d68c",
+      "id": "b27e27b1-6edc-419f-b14d-efffa6a133d7",
       "property_type": "Maison individuelle",
       "location": "Bordeaux",
       "address": null,
@@ -261,7 +261,7 @@
       },
       {
         "field_name": "location_context",
-        "value": "Le quartier autour de la maison individuelle à Bordeaux bénéficie d’une densité commerciale respectable (12 commerces) et d’une offre de restauration (4 établissements) ainsi que de services de santé (3 établissements) dans un rayon de 400 m. La présence de 9 arrêts de transport public indique une bonne desserte, ce qui rend le secteur attractif pour des locataires actifs (jeunes cadres, étudiants en mobilité, seniors) qui recherchent proximité des commodités et facilité d’accès. L’absence d’établissements d’enseignement (0) constitue toutefois un frein pour les familles avec enfants, qui devront se déplacer plus loin pour les écoles, ce qui peut réduire l’attractivité locative auprès de ce segment. En résumé, le profil du quartier convient surtout à des locataires individuels ou en couple sans enfants, recherchant un cadre urbain bien pourvu en services de proximité et en mobilité.",
+        "value": "Le secteur étudié autour de la maison individuelle à Bordeaux bénéficie d’une densité commerciale importante : 12 commerces, 4 restaurants, 3 établissements de santé, 2 agences bancaires et 9 arrêts de transport (bus, tram, etc.) dans un rayon de 400 m. Cette offre diversifiée assure une forte attractivité pour des locataires actifs (jeunes cadres, couples sans enfants, seniors) qui recherchent proximité des services du quotidien et bonnes liaisons de transport. En revanche, l’absence totale d’établissements d’enseignement (écoles, crèches) dans le périmètre limite l’attrait pour les familles avec enfants en âge scolaire, ce qui peut restreindre le profil locatif à des ménages sans enfants ou à des étudiants/jeunes actifs.",
         "provenance": {
           "source_type": "external_source",
           "reference": "Analyse LLM sur donnees OSM",
@@ -271,27 +271,37 @@
       },
       {
         "field_name": "location_opportunity:commercial",
-        "value": "Si le bien comporte un rez‑de‑chaussée, l’ouverture d’un petit commerce de proximité (ex. épicerie de quartier ou café) pourrait profiter de la forte densité commerciale (12 commerces) tout en répondant à la demande locale, notamment auprès des usagers du transport (9 arrêts) qui circulent quotidiennement dans le secteur.",
+        "value": "Création d’un local commercial au rez‑de‑chaussée (ex. boutique de produits bio, espace de coworking ou service de proximité non présent) pour profiter de la forte fréquentation piétonne générée par les 12 commerces et 4 restaurants existants.",
         "provenance": {
           "source_type": "external_source",
           "reference": "Analyse LLM sur donnees OSM",
           "note": null,
-          "confidence": 0.68
+          "confidence": 0.72
         }
       },
       {
-        "field_name": "location_opportunity:service",
-        "value": "Un point de vente de produits de santé (pharmacie ou parapharmacie) pourrait être envisagé, compte tenu de la présence de 3 établissements de santé mais de l’absence d’indication précise sur la nature de ces services, laissant une marge pour un commerce complémentaire.",
+        "field_name": "location_opportunity:service_education",
+        "value": "Installation d’une crèche ou d’un centre d’accueil petite enfance, secteur totalement absent (0 établissement d’éducation) et donc potentiellement sous‑servi pour les jeunes familles du quartier.",
         "provenance": {
           "source_type": "external_source",
           "reference": "Analyse LLM sur donnees OSM",
           "note": null,
-          "confidence": 0.55
+          "confidence": 0.81
         }
       },
       {
         "field_name": "location_risk",
-        "value": "Absence d'établissements d'enseignement à moins de 400 m, ce qui décourage les familles avec enfants et limite la diversification du profil locatif.",
+        "value": "Absence d'établissements d'enseignement à moins de 400 m, ce qui décourage les familles avec enfants en âge scolaire.",
+        "provenance": {
+          "source_type": "external_source",
+          "reference": "Analyse LLM sur donnees OSM",
+          "note": "severity:eleve",
+          "confidence": null
+        }
+      },
+      {
+        "field_name": "location_risk",
+        "value": "Concurrence élevée parmi les commerces de proximité (12 commerces déjà présents) pouvant rendre difficile la rentabilité d’un nouveau commerce sans différenciation claire.",
         "provenance": {
           "source_type": "external_source",
           "reference": "Analyse LLM sur donnees OSM",
@@ -301,7 +311,7 @@
       },
       {
         "field_name": "location_risk",
-        "value": "Concurrence élevée parmi les commerces existants (12 commerces) pouvant rendre difficile le lancement d’un nouveau commerce sans différenciation claire.",
+        "value": "Bien que le réseau de transport soit dense (9 arrêts), la dépendance à l’automobile reste possible si les lignes ne desservent pas directement les zones d’emploi majeures, ce qui pourrait limiter l’attractivité pour certains locataires.",
         "provenance": {
           "source_type": "external_source",
           "reference": "Analyse LLM sur donnees OSM",
@@ -411,8 +421,18 @@
         {
           "category": "marche",
           "title": "Risque lie a l'emplacement",
+          "severity": "eleve",
+          "evidence": "Absence d'établissements d'enseignement à moins de 400 m, ce qui décourage les familles avec enfants en âge scolaire.",
+          "impact": "Peut affecter l'attractivite locative ou la valorisation du bien.",
+          "owner": "investisseur",
+          "next_action": "Prendre en compte ce facteur d'emplacement dans la decision finale.",
+          "source_reference": "Analyse LLM sur donnees OSM"
+        },
+        {
+          "category": "marche",
+          "title": "Risque lie a l'emplacement",
           "severity": "moyen",
-          "evidence": "Absence d'établissements d'enseignement à moins de 400 m, ce qui décourage les familles avec enfants et limite la diversification du profil locatif.",
+          "evidence": "Concurrence élevée parmi les commerces de proximité (12 commerces déjà présents) pouvant rendre difficile la rentabilité d’un nouveau commerce sans différenciation claire.",
           "impact": "Peut affecter l'attractivite locative ou la valorisation du bien.",
           "owner": "investisseur",
           "next_action": "Prendre en compte ce facteur d'emplacement dans la decision finale.",
@@ -422,7 +442,7 @@
           "category": "marche",
           "title": "Risque lie a l'emplacement",
           "severity": "faible",
-          "evidence": "Concurrence élevée parmi les commerces existants (12 commerces) pouvant rendre difficile le lancement d’un nouveau commerce sans différenciation claire.",
+          "evidence": "Bien que le réseau de transport soit dense (9 arrêts), la dépendance à l’automobile reste possible si les lignes ne desservent pas directement les zones d’emploi majeures, ce qui pourrait limiter l’attractivité pour certains locataires.",
           "impact": "Peut affecter l'attractivite locative ou la valorisation du bien.",
           "owner": "investisseur",
           "next_action": "Prendre en compte ce facteur d'emplacement dans la decision finale.",
@@ -468,9 +488,10 @@
       "conditions": [
         "Titre de propriete non fourni et non signale — Demander explicitement 'titre de propriete' avant de poursuivre.",
         "Etat locatif / baux non fourni et non signale — Demander explicitement 'etat locatif / baux' avant de poursuivre.",
+        "Risque lie a l'emplacement — Prendre en compte ce facteur d'emplacement dans la decision finale.",
         "Financement non viable en scenario de base (DSCR < 1) — Renegocier le prix, augmenter l'apport, ou abandonner l'operation."
       ],
-      "loi_draft": "LETTRE D'INTENTION NON CONTRAIGNANTE (PROJET — A VALIDER PAR L'UTILISATEUR AVANT ENVOI)\n\nBien : Maison individuelle — Bordeaux\nPrix propose (indicatif) : 194 667 EUR\n\nCette lettre exprime un interet non contraignant pour l'acquisition du bien ci-dessus,\nsous reserve des conditions suivantes et d'une due diligence complete :\n\n- Titre de propriete non fourni et non signale — Demander explicitement 'titre de propriete' avant de poursuivre.\n- Etat locatif / baux non fourni et non signale — Demander explicitement 'etat locatif / baux' avant de poursuivre.\n- Financement non viable en scenario de base (DSCR < 1) — Renegocier le prix, augmenter l'apport, ou abandonner l'operation.\n\nCe document est un projet automatiquement genere. Il ne constitue ni une offre ferme,\nni un engagement contractuel, et doit etre revu et valide par l'investisseur (et, le cas\necheant, son conseil) avant toute transmission au vendeur.\n",
+      "loi_draft": "LETTRE D'INTENTION NON CONTRAIGNANTE (PROJET — A VALIDER PAR L'UTILISATEUR AVANT ENVOI)\n\nBien : Maison individuelle — Bordeaux\nPrix propose (indicatif) : 194 667 EUR\n\nCette lettre exprime un interet non contraignant pour l'acquisition du bien ci-dessus,\nsous reserve des conditions suivantes et d'une due diligence complete :\n\n- Titre de propriete non fourni et non signale — Demander explicitement 'titre de propriete' avant de poursuivre.\n- Etat locatif / baux non fourni et non signale — Demander explicitement 'etat locatif / baux' avant de poursuivre.\n- Risque lie a l'emplacement — Prendre en compte ce facteur d'emplacement dans la decision finale.\n- Financement non viable en scenario de base (DSCR < 1) — Renegocier le prix, augmenter l'apport, ou abandonner l'operation.\n\nCe document est un projet automatiquement genere. Il ne constitue ni une offre ferme,\nni un engagement contractuel, et doit etre revu et valide par l'investisseur (et, le cas\necheant, son conseil) avant toute transmission au vendeur.\n",
       "rationale": "Prix maximum = NOI de base (11680.0) / taux de capitalisation cible (6.0%). Valeur de marche mediane (DVF) = 489583.0. Prix cible = min(valeur de marche, prix maximum), plafonne par le prix demande (300000.0). Plafond en scenario de stress = NOI du scenario 'baisse' / meme taux de capitalisation cible."
     },
     "due_diligence": {
@@ -488,6 +509,13 @@
           "status": "ouvert",
           "severity_driver": "eleve",
           "linked_risk_title": "Etat locatif / baux non fourni et non signale"
+        },
+        {
+          "task_type": "question_ouverte",
+          "description": "Prendre en compte ce facteur d'emplacement dans la decision finale.",
+          "status": "ouvert",
+          "severity_driver": "eleve",
+          "linked_risk_title": "Risque lie a l'emplacement"
         },
         {
           "task_type": "question_ouverte",
@@ -525,9 +553,9 @@
           "linked_risk_title": "Operation tres sensible aux hypotheses (faible marge de manoeuvre)"
         }
       ],
-      "unresolved_high_risk_tasks": 3,
+      "unresolved_high_risk_tasks": 4,
       "decision_ready": false,
-      "audit_trail_note": "7 tache(s) de due diligence generee(s) a partir de 7 risque(s) identifie(s). Chaque tache reste reliee au risque (et donc a la source) qui l'a declenchee via linked_risk_title, formant la piste d'audit de l'annonce a la decision."
+      "audit_trail_note": "8 tache(s) de due diligence generee(s) a partir de 8 risque(s) identifie(s). Chaque tache reste reliee au risque (et donc a la source) qui l'a declenchee via linked_risk_title, formant la piste d'audit de l'annonce a la decision."
     },
     "pending_approval": null,
     "approval_history": []

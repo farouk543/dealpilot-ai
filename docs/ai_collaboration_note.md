@@ -1,104 +1,100 @@
-# Note de collaboration avec l'IA
+# AI Collaboration Note
 
-Ce projet a été construit avec Claude Code (Anthropic) comme assistant de développement, sur 5 jours,
-en solo (pas d'équipe). Cette note documente honnêtement ce qui a été délégué, ce qui a été vérifié,
-ce qui a été rejeté ou corrigé, et quelles décisions m'appartiennent réellement — critère explicite
-du barème de ce sprint.
+*[Version française : ai_collaboration_note.fr.md](ai_collaboration_note.fr.md)*
 
-## Ce qui a été délégué à l'IA
+This project was built with Claude Code (Anthropic) as a development assistant, over 5 days, solo
+(no team). This note honestly documents what was delegated, what was verified, what was rejected or
+corrected, and which decisions genuinely remain mine — an explicit criterion of this sprint's
+rubric.
 
-- **Génération de code** pour chaque microservice une fois l'architecture et les choix techniques
-  arrêtés (FastAPI, Pydantic, LangGraph, ReportLab/openpyxl, clients HTTP vers Groq/Gemini/DVF/BAN/
-  Apicarto).
-- **Rédaction de documentation** : ce fichier, ainsi que `README.md`, `RUNBOOK.md`,
-  `docs/architecture.md`, `docs/case_study.md`, `docs/demo_script.md`, `docs/iteration_plan.md`.
-- **Conception des cas de test synthétiques adversariaux** (11 cas, voir `data/synthetic_cases/`) —
-  proposés par l'IA à partir de la liste de modes de panne du brief d'origine, puis vérifiés par moi
-  contre le comportement réel du système avant exécution.
-- **Diagnostic de bugs** : lecture de logs, formulation d'hypothèses, correctifs proposés.
+## What was delegated to AI
 
-## Ce qui a été vérifié avant d'être accepté
+- **Code generation** for each microservice once architecture and technical choices were settled
+  (FastAPI, Pydantic, LangGraph, ReportLab/openpyxl, HTTP clients to Groq/Gemini/DVF/BAN/Apicarto).
+- **Documentation writing**: this file, plus `README.md`, `RUNBOOK.md`, `docs/architecture.md`,
+  `docs/case_study.md`, `docs/demo_script.md`, `docs/iteration_plan.md`.
+- **Design of adversarial synthetic test cases** (11 cases, see `data/synthetic_cases/`) — proposed
+  by the AI from the original brief's list of failure modes, then verified by me against the
+  system's real behavior before execution.
+- **Bug diagnosis**: reading logs, forming hypotheses, proposing fixes.
 
-Rien n'a été accepté sur la seule confiance d'une affirmation de l'IA. Trois exemples concrets de
-vérification qui a changé le résultat :
+## What was verified before being accepted
 
-1. **Le cas de test `case_01`** : l'IA avait initialement nommé les fichiers de documents synthétiques
-   `case_01_lease_summary.txt` / `case_01_title_deed.txt`. Avant de lancer quoi que ce soit, j'ai
-   demandé une lecture du code réel de détection de documents manquants
-   (`services/risk/app/rules.py`) — qui s'est révélée comparer des mots-clés français
-   (« titre », « etat locatif ») contre le **nom du fichier**, pas son contenu. Les fichiers ont été
-   renommés avant la première exécution, évitant un faux résultat de test.
-2. **Le bug de zonage réel retournant `null`** : l'IA a proposé une hypothèse (l'orchestrateur n'avait
-   pas été reconstruit après un changement du contrat Pydantic partagé). Vérifiée en inspectant
-   directement le schéma chargé dans le conteneur avant/après reconstruction — confirmée, corrigée,
-   et documentée dans `docs/architecture.md` comme piège récurrent de l'architecture microservices
-   choisie.
-3. **Le "bug" du cas 10** (financement non viable) : un premier passage d'évaluation l'a signalé en
-   échec. Plutôt que d'accepter la théorie de l'IA sur la cause à la première tentative, j'ai demandé
-   une reproduction isolée du même appel — qui a réussi. La vraie cause (timing du harnais de test,
-   pas un bug produit) n'a été retenue qu'après cette vérification, pour éviter de corriger du code
-   qui n'était pas cassé.
-4. **Le cadrage des images de la vue 360°** : après un premier correctif de prompt jugé insuffisant à
-   l'usage (images toujours trop resserrées), l'IA a proposé un deuxième correctif — qui n'a *presque
-   rien changé*. Plutôt que d'en rester là, j'ai demandé une inspection des logs bruts du modèle, qui a
-   révélé la vraie cause : le prompt dépassait la limite de 77 tokens du tokenizer CLIP, et c'est
-   précisément la partie ajoutée par le premier correctif qui se faisait couper. Le correctif final
-   (réordonner le prompt) n'a été appliqué qu'après cette vérification par les logs, pas par simple
-   confiance dans la deuxième tentative de l'IA.
+Nothing was accepted on the AI's word alone. Four concrete examples where verification changed the
+outcome:
 
-## Ce qui a été rejeté ou corrigé
+1. **The `case_01` test case**: the AI had initially named the synthetic document files
+   `case_01_lease_summary.txt` / `case_01_title_deed.txt`. Before running anything, I asked for a
+   reading of the actual missing-document detection code (`services/risk/app/rules.py`) — which
+   turned out to match French keywords (`titre`, `etat locatif`) against the **file name**, not its
+   content. The files were renamed before the first run, avoiding a false test result.
+2. **The real-zoning bug returning `null`**: the AI proposed a hypothesis (the orchestrator hadn't
+   been rebuilt after a shared Pydantic contract change). Verified by directly inspecting the schema
+   loaded inside the container before/after rebuilding — confirmed, fixed, and documented in
+   `docs/architecture.md` as a recurring pitfall of the chosen microservices architecture.
+3. **The case-10 "bug"** (unprofitable financing): a first evaluation pass flagged it as failing.
+   Rather than accepting the AI's theory about the cause on the first try, I asked for an isolated
+   reproduction of the same call — which succeeded. The real cause (test-harness timing, not a
+   product bug) was only accepted after this verification, to avoid fixing code that wasn't broken.
+4. **The 360° view images' framing**: after a first prompt fix judged insufficient in practice
+   (images still too tightly cropped), the AI proposed a second fix — which changed *almost
+   nothing*. Rather than leaving it there, I asked for an inspection of the model's raw logs, which
+   revealed the real cause: the prompt exceeded the CLIP tokenizer's 77-token limit, and it was
+   precisely the part added by the first fix that was getting cut off. The final fix (reordering the
+   prompt) was only applied after this log-based verification, not out of simple trust in the AI's
+   second attempt.
 
-- **Approche de rendu d'images initiale** : Replicate (API payante) a été testé puis explicitement
-  écarté en faveur d'un modèle Stable Diffusion auto-hébergé, pour éviter un coût récurrent non
-  maîtrisé sur un usage potentiellement fréquent.
-- **`enable_vae_slicing()`** proposé par l'IA lors du passage à SDXL a levé une `AttributeError`
-  (méthode inexistante sur cette classe de pipeline) — retiré immédiatement plutôt que contourné.
-- **Le calcul du fichier `docs/eval_results.md`** est entièrement généré par script
-  (`eval/run_eval.py`) à partir de résultats réels obtenus en frappant le système réellement démarré,
-  jamais rédigé ou rempli à la main par l'IA — pour garantir qu'aucun résultat n'est inventé.
-- **Aucun essai baseline humain chronométré n'a été fabriqué** : quand il est devenu clair qu'aucun
-  vrai investisseur n'était disponible pendant le sprint, le choix a été de documenter cette limite
-  explicitement dans `docs/eval_results.md` plutôt que de laisser l'IA produire un chiffre baseline
-  inventé pour combler le trou.
-- **La maquette 3D mesurable (Blender/Cycles)** — un chantier entier (portage de la géométrie,
-  animation de phases de construction, HDRI, verrou GPU inter-services) a été construit et vérifié
-  fonctionnel, puis **rejeté du parcours principal** après comparaison visuelle directe avec le rendu
-  photoréaliste SDXL déjà utilisé pour l'intérieur : la précision géométrique ne compensait pas
-  l'écart de qualité perçue pour cet usage de vente/présentation. Le code reste dans le dépôt (pas
-  supprimé, juste débranché du parcours utilisateur) plutôt que jeté, au cas où l'exactitude
-  dimensionnelle redevienne prioritaire.
+## What was rejected or corrected
 
-## Décisions qui m'appartiennent
+- **Initial image-rendering approach**: Replicate (a paid API) was tested then explicitly dropped in
+  favor of a self-hosted Stable Diffusion model, to avoid an uncontrolled recurring cost on
+  potentially frequent usage.
+- **`enable_vae_slicing()`**, proposed by the AI during the SDXL migration, raised an
+  `AttributeError` (method doesn't exist on that pipeline class) — removed immediately rather than
+  worked around.
+- **The `docs/eval_results.md` file's content** is entirely generated by a script
+  (`eval/run_eval.py`) from real results obtained by hitting the actually-running system, never
+  written or filled in by hand by the AI — to guarantee no result is invented.
+- **No human baseline trial was fabricated**: once it became clear no real investor was available
+  during the sprint, the choice was to explicitly document this limitation in
+  `docs/eval_results.md` rather than let the AI produce an invented baseline number to fill the gap.
+- **The measurable 3D model (Blender/Cycles)** — an entire workstream (porting the geometry,
+  construction-phase animation, HDRI, cross-service GPU lock) was built and verified working, then
+  **rejected from the main flow** after a direct visual comparison with the photorealistic SDXL
+  rendering already used for interiors: geometric precision didn't make up for the perceived-quality
+  gap for this sales/presentation use case. The code stays in the repository (not deleted, just
+  unplugged from the user flow) rather than thrown away, in case dimensional accuracy becomes a
+  priority again.
 
-- **Le choix de l'architecture microservices** plutôt qu'un monolithe, dès le départ du projet — un
-  choix délibéré de complexité opérationnelle accrue en échange d'isolation de panne et de
-  remplaçabilité des fournisseurs LLM, assumé consciemment.
-- **Le choix du marché (France, immobilier résidentiel locatif)** plutôt que d'autres marchés
-  envisagés, pour la richesse des diagnostics réglementaires obligatoires (DPE, amiante, plomb, ERP)
-  qui donnent une vraie structure au module d'intelligence documentaire.
-- **Le périmètre complet du flux en 10 étapes** dès le premier jour, plutôt qu'une version réduite —
-  un choix qui a augmenté le risque d'exécution sur 5 jours, assumé en connaissance de cause.
-- **La priorisation, avant la documentation finale, du renforcement technique** (file GPU, retry,
-  persistance, logging corrélé, distinction santé/modèle chargé) et de nouveaux usages produit
-  (export, comparaison, checklist administrative, résumé, contre-offre) plutôt que de documenter un
-  système figé plus tôt — pari que la profondeur produit pèserait plus que des livrables écrits plus
-  longs.
-- **La décision d'étendre un correctif de fiabilité à 6 services supplémentaires** dès qu'un bug réel
-  a été trouvé par test de panne sur un seul service (`market`), plutôt que de corriger seulement le
-  cas trouvé — jugement qu'un même trou architectural répété ailleurs valait la peine d'être
-  anticipé avant qu'un incident réel ne le révèle service par service.
-- **L'arbitrage final entre profondeur technique et documentation** dans le temps restreint du
-  sprint, service par service, approuvé explicitement à chaque étape plutôt que délégué à l'IA en
-  bloc.
-- **Le pivot de la maquette 3D vers la vue 360° IA** — après avoir vu les deux résultats côte à côte,
-  la décision de retirer la maquette mesurable du parcours principal au profit d'un rendu
-  photoréaliste (moins précis géométriquement, mais nettement plus convaincant visuellement) a été
-  une décision produit, pas une décision technique déléguée — l'IA avait construit les deux options
-  correctement, le choix entre elles m'appartenait.
+## Decisions that are mine
 
-## Limite de cette collaboration
+- **The choice of microservices architecture** rather than a monolith, from the project's start — a
+  deliberate choice of higher operational complexity in exchange for failure isolation and LLM
+  provider replaceability, made consciously.
+- **The choice of market (France, residential rental real estate)** over other markets considered,
+  for the richness of mandatory regulatory diagnostics (DPE, asbestos, lead, ERP) that give the
+  document-intelligence module real structure.
+- **The full 10-step flow scope** from day one, rather than a reduced version — a choice that
+  increased execution risk over 5 days, accepted knowingly.
+- **Prioritizing technical hardening before final documentation** (GPU lock, retry, persistence,
+  correlated logging, health/model-loaded distinction) and new product features (export, comparison,
+  administrative checklist, summary, counter-offer) rather than documenting a frozen system earlier
+  — a bet that product depth would matter more than longer written deliverables.
+- **The decision to extend a reliability fix to 6 additional services** as soon as a real bug was
+  found via a failure test on a single service (`market`), rather than fixing only the case found —
+  a judgment call that the same architectural gap, repeated elsewhere, was worth anticipating before
+  a real incident revealed it service by service.
+- **The final trade-off between technical depth and documentation** within the sprint's limited time,
+  service by service, explicitly approved at each step rather than delegated to the AI in bulk.
+- **The pivot from the 3D model to the AI-generated 360° view** — after seeing both results
+  side-by-side, the decision to remove the measurable model from the main flow in favor of a
+  photorealistic rendering (less geometrically precise, but noticeably more visually convincing) was
+  a product decision, not a delegated technical one — the AI had built both options correctly, the
+  choice between them was mine.
 
-Ce projet a été construit en solo avec un seul relecteur (moi-même) et un assistant IA — aucune revue
-de code par un pair humain indépendant n'a eu lieu, contrainte assumée du format de ce sprint. La
-vérification de la partie 2 de cette note (« ce qui a été vérifié ») compense partiellement ce
-manque mais ne le remplace pas.
+## Limitation of this collaboration
+
+This project was built solo, with a single reviewer (myself) and an AI assistant — no independent
+human peer code review took place, an accepted constraint of this sprint's format. The verification
+described in section 2 ("what was verified") partly compensates for that gap but does not replace
+it.

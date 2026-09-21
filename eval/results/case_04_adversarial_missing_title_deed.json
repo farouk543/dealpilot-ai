@@ -1,11 +1,11 @@
 {
   "status": 200,
   "result": {
-    "deal_id": "480a53ff-6a42-4961-be1f-9949c6f4b10a",
-    "created_at": "2026-09-21T08:44:11.069389Z",
+    "deal_id": "3186cc52-21d2-4a0c-8f87-7df744e04666",
+    "created_at": "2026-09-21T09:42:37.859046Z",
     "current_step": "final_file",
     "property": {
-      "id": "0b86104b-512b-4f15-be48-e6f8341adc4c",
+      "id": "863becc6-d9b8-434b-adf9-90aec08dd500",
       "property_type": "Immeuble résidentiel",
       "location": "Lyon",
       "address": null,

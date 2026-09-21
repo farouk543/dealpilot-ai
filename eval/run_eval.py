@@ -165,8 +165,49 @@ def run_all() -> list[dict]:
 
 def write_markdown_report(report: list[dict]) -> None:
     total_duration = sum(r["duration_s"] for r in report)
+
+    # Computed early so the English summary (below) can report final numbers
+    # without duplicating the per-case loop that also builds the French detail.
+    _pass = _fail = _info = 0
+    for _r in report:
+        _verdicts = [c["verdict"] for c in _r["checks"]]
+        _pass += _verdicts.count("PASS")
+        _fail += _verdicts.count("FAIL")
+        _info += _verdicts.count("INFO")
+
     lines = [
-        "# Résultats d'évaluation — DealPilot AI",
+        "# Evaluation Results — DealPilot AI",
+        "",
+        "*(English summary below; the detailed per-case results further down are the live "
+        "system's own French-language output — the target user works in French, see "
+        "`docs/case_study.md`.)*",
+        "",
+        f"Ran on {len(report)} synthetic cases (`data/synthetic_cases/`) against the real system "
+        "running locally (`docker compose up`), including 9 adversarial scenarios matching the "
+        "failure modes identified in the original brief (contradictions, missing documents, broken "
+        "URL, implausible rent, ambiguous visual defect, incompatible surfaces, service outage, "
+        "unprofitable financing, prompt injection).",
+        "",
+        f"**Result: {_pass} checks passed, {_fail} failed, {_info} documented known limitation(s).** "
+        f"Average duration per case: {round(total_duration / len(report), 1)}s.",
+        "",
+        "**Baseline vs system**: no real timed human trial was run (solo sprint, no access to a "
+        "real investor for a blind test) — the baseline is a qualitative estimate from the manual "
+        "workflow documented in `docs/case_study.md` (several hours per deal, spread over several "
+        "days). The system's measured time covers automated calculation only, not the investor's "
+        "human review of the result — which stays necessary and voluntary (the system never "
+        "decides). See `docs/case_study.md` for why this baseline comparison is not presented as "
+        "proof.",
+        "",
+        "**What this test pass found and fixed**: a real bug (`case_09`, a `market` service outage "
+        "crashed the whole pipeline with a 500 error instead of degrading gracefully) — fixed, then "
+        "the same safety net was extended preemptively to 6 other steps with the same untested "
+        "weakness. One known limitation was found and left undone: no rule detects an implausible "
+        "rent vs market price — deferred to `docs/iteration_plan.md`.",
+        "",
+        "---",
+        "",
+        "# Résultats d'évaluation — DealPilot AI (détail, sortie système en français)",
         "",
         f"Exécuté sur {len(report)} cas synthétiques (`data/synthetic_cases/`), contre le système ",
         "réel tournant en local (`docker compose up`), y compris 9 scénarios adverses correspondant ",

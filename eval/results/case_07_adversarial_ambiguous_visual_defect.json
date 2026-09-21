@@ -1,11 +1,11 @@
 {
   "status": 200,
   "result": {
-    "deal_id": "8c53d5d6-cf86-4329-a381-6a0c77e2fda2",
-    "created_at": "2026-09-21T08:45:45.601317Z",
+    "deal_id": "5e9f58d3-9c8e-40a9-b144-601c92396dbc",
+    "created_at": "2026-09-21T09:43:42.458927Z",
     "current_step": "final_file",
     "property": {
-      "id": "7607b5fd-efad-4555-9e54-5f6786460442",
+      "id": "56d39061-8bc0-41cc-b647-5907a7fd4344",
       "property_type": "Immeuble résidentiel",
       "location": "Lyon",
       "address": null,
@@ -125,6 +125,16 @@
     },
     "document_facts": [
       {
+        "field_name": "vision_error",
+        "value": "case_07_photo_cuisine.jpg: Server error '503 Service Unavailable' for url 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=AQ.Ab8RN6ISFW71bRMQmaQK2eDPq89EjLkFoQyMVmf0wQB3DcqzJA'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/503",
+        "provenance": {
+          "source_type": "vision_analysis",
+          "reference": "case_07_photo_cuisine.jpg",
+          "note": null,
+          "confidence": null
+        }
+      },
+      {
         "field_name": "vision_disclaimer",
         "value": "Analyse visuelle indicative uniquement ; ne constitue pas une expertise ou certification structurelle.",
         "provenance": {
@@ -205,132 +215,12 @@
         }
       },
       {
-        "field_name": "location_count:commerces",
-        "value": "477",
+        "field_name": "location_error",
+        "value": "donnees OpenStreetMap indisponibles (panne ou limite de requetes Overpass)",
         "provenance": {
           "source_type": "external_source",
-          "reference": "OpenStreetMap/Overpass, rayon 400m",
+          "reference": "Overpass API",
           "note": null,
-          "confidence": null
-        }
-      },
-      {
-        "field_name": "location_count:restauration",
-        "value": "89",
-        "provenance": {
-          "source_type": "external_source",
-          "reference": "OpenStreetMap/Overpass, rayon 400m",
-          "note": null,
-          "confidence": null
-        }
-      },
-      {
-        "field_name": "location_count:sante",
-        "value": "5",
-        "provenance": {
-          "source_type": "external_source",
-          "reference": "OpenStreetMap/Overpass, rayon 400m",
-          "note": null,
-          "confidence": null
-        }
-      },
-      {
-        "field_name": "location_count:education",
-        "value": "2",
-        "provenance": {
-          "source_type": "external_source",
-          "reference": "OpenStreetMap/Overpass, rayon 400m",
-          "note": null,
-          "confidence": null
-        }
-      },
-      {
-        "field_name": "location_count:services_bancaires",
-        "value": "8",
-        "provenance": {
-          "source_type": "external_source",
-          "reference": "OpenStreetMap/Overpass, rayon 400m",
-          "note": null,
-          "confidence": null
-        }
-      },
-      {
-        "field_name": "location_count:transport",
-        "value": "23",
-        "provenance": {
-          "source_type": "external_source",
-          "reference": "OpenStreetMap/Overpass, rayon 400m",
-          "note": null,
-          "confidence": null
-        }
-      },
-      {
-        "field_name": "location_vibrancy_index",
-        "value": "100",
-        "provenance": {
-          "source_type": "external_source",
-          "reference": "OpenStreetMap/Overpass, rayon 400m",
-          "note": null,
-          "confidence": null
-        }
-      },
-      {
-        "field_name": "location_context",
-        "value": "Le secteur étudié autour de l’immeuble résidentiel à Lyon (rayon 400 m) est extrêmement dense : 477 commerces, 89 établissements de restauration, 23 arrêts ou stations de transport, 8 banques, mais seulement 5 structures de santé et 2 établissements d’éducation. Pour un investisseur locatif, cela signifie une attractivité forte auprès de jeunes actifs, de cadres et d’étudiants qui recherchent la proximité des services du quotidien et des transports. La demande locative est donc élevée et les loyers tendent à être supérieurs à la moyenne régionale. Le profil des locataires sera majoritairement des couples sans enfants ou des colocations étudiantes, recherchant des appartements bien desservis et proches des commodités.",
-        "provenance": {
-          "source_type": "external_source",
-          "reference": "Analyse LLM sur donnees OSM",
-          "note": null,
-          "confidence": null
-        }
-      },
-      {
-        "field_name": "location_opportunity:commercial_ground_floor",
-        "value": "Disponibilité de surfaces au rez‑de‑chaussée pouvant accueillir une boutique de proximité ou un service de santé (pharmacie, cabinet médical) – le secteur ne compte que 5 établissements de santé pour 400 m, ce qui laisse une marge pour un nouveau acteur.",
-        "provenance": {
-          "source_type": "external_source",
-          "reference": "Analyse LLM sur donnees OSM",
-          "note": null,
-          "confidence": 0.8
-        }
-      },
-      {
-        "field_name": "location_opportunity:childcare",
-        "value": "Création d’une crèche ou d’une garderie, car seules 2 structures d’éducation sont recensées dans le périmètre, alors que la forte présence de jeunes familles et d’étudiants crée une demande non satisfaite.",
-        "provenance": {
-          "source_type": "external_source",
-          "reference": "Analyse LLM sur donnees OSM",
-          "note": null,
-          "confidence": 0.7
-        }
-      },
-      {
-        "field_name": "location_risk",
-        "value": "Saturation commerciale : le nombre très élevé de commerces (477) et de restaurants (89) crée une forte concurrence pour tout nouveau commerce au rez‑de‑chaussée.",
-        "provenance": {
-          "source_type": "external_source",
-          "reference": "Analyse LLM sur donnees OSM",
-          "note": "severity:moyen",
-          "confidence": null
-        }
-      },
-      {
-        "field_name": "location_risk",
-        "value": "Bruit et trafic liés à la densité des commerces et de la restauration, pouvant réduire l’attrait pour des locataires recherchant calme et tranquillité.",
-        "provenance": {
-          "source_type": "external_source",
-          "reference": "Analyse LLM sur donnees OSM",
-          "note": "severity:eleve",
-          "confidence": null
-        }
-      },
-      {
-        "field_name": "location_risk",
-        "value": "Prix d’achat et loyers élevés du fait de la localisation très prisée, ce qui peut réduire la rentabilité brute initiale.",
-        "provenance": {
-          "source_type": "external_source",
-          "reference": "Analyse LLM sur donnees OSM",
-          "note": "severity:moyen",
           "confidence": null
         }
       }
@@ -434,34 +324,24 @@
           "source_reference": "documents_missing"
         },
         {
-          "category": "marche",
-          "title": "Risque lie a l'emplacement",
+          "category": "technique",
+          "title": "Echec d'analyse automatisee (vision_error)",
           "severity": "moyen",
-          "evidence": "Saturation commerciale : le nombre très élevé de commerces (477) et de restaurants (89) crée une forte concurrence pour tout nouveau commerce au rez‑de‑chaussée.",
-          "impact": "Peut affecter l'attractivite locative ou la valorisation du bien.",
+          "evidence": "case_07_photo_cuisine.jpg: Server error '503 Service Unavailable' for url 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=AQ.Ab8RN6ISFW71bRMQmaQK2eDPq89EjLkFoQyMVmf0wQB3DcqzJA'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/503",
+          "impact": "Cette source n'a pas pu etre analysee automatiquement ; l'information peut etre incomplete.",
           "owner": "investisseur",
-          "next_action": "Prendre en compte ce facteur d'emplacement dans la decision finale.",
-          "source_reference": "Analyse LLM sur donnees OSM"
+          "next_action": "Reessayer l'analyse ou traiter cette source manuellement.",
+          "source_reference": "case_07_photo_cuisine.jpg"
         },
         {
-          "category": "marche",
-          "title": "Risque lie a l'emplacement",
-          "severity": "eleve",
-          "evidence": "Bruit et trafic liés à la densité des commerces et de la restauration, pouvant réduire l’attrait pour des locataires recherchant calme et tranquillité.",
-          "impact": "Peut affecter l'attractivite locative ou la valorisation du bien.",
-          "owner": "investisseur",
-          "next_action": "Prendre en compte ce facteur d'emplacement dans la decision finale.",
-          "source_reference": "Analyse LLM sur donnees OSM"
-        },
-        {
-          "category": "marche",
-          "title": "Risque lie a l'emplacement",
+          "category": "technique",
+          "title": "Echec d'analyse automatisee (location_error)",
           "severity": "moyen",
-          "evidence": "Prix d’achat et loyers élevés du fait de la localisation très prisée, ce qui peut réduire la rentabilité brute initiale.",
-          "impact": "Peut affecter l'attractivite locative ou la valorisation du bien.",
+          "evidence": "donnees OpenStreetMap indisponibles (panne ou limite de requetes Overpass)",
+          "impact": "Cette source n'a pas pu etre analysee automatiquement ; l'information peut etre incomplete.",
           "owner": "investisseur",
-          "next_action": "Prendre en compte ce facteur d'emplacement dans la decision finale.",
-          "source_reference": "Analyse LLM sur donnees OSM"
+          "next_action": "Reessayer l'analyse ou traiter cette source manuellement.",
+          "source_reference": "Overpass API"
         },
         {
           "category": "financier",
@@ -501,9 +381,9 @@
       "stress_cap_price": 533733.33,
       "target_cap_rate_pct": 6.0,
       "conditions": [
-        "Risque lie a l'emplacement — Prendre en compte ce facteur d'emplacement dans la decision finale."
+        "Aucune condition suspensive critique identifiee a ce stade ; revalider avant signature."
       ],
-      "loi_draft": "LETTRE D'INTENTION NON CONTRAIGNANTE (PROJET — A VALIDER PAR L'UTILISATEUR AVANT ENVOI)\n\nBien : Immeuble résidentiel — Lyon\nPrix propose (indicatif) : 650 000 EUR\n\nCette lettre exprime un interet non contraignant pour l'acquisition du bien ci-dessus,\nsous reserve des conditions suivantes et d'une due diligence complete :\n\n- Risque lie a l'emplacement — Prendre en compte ce facteur d'emplacement dans la decision finale.\n\nCe document est un projet automatiquement genere. Il ne constitue ni une offre ferme,\nni un engagement contractuel, et doit etre revu et valide par l'investisseur (et, le cas\necheant, son conseil) avant toute transmission au vendeur.\n",
+      "loi_draft": "LETTRE D'INTENTION NON CONTRAIGNANTE (PROJET — A VALIDER PAR L'UTILISATEUR AVANT ENVOI)\n\nBien : Immeuble résidentiel — Lyon\nPrix propose (indicatif) : 650 000 EUR\n\nCette lettre exprime un interet non contraignant pour l'acquisition du bien ci-dessus,\nsous reserve des conditions suivantes et d'une due diligence complete :\n\n- Aucune condition suspensive critique identifiee a ce stade ; revalider avant signature.\n\nCe document est un projet automatiquement genere. Il ne constitue ni une offre ferme,\nni un engagement contractuel, et doit etre revu et valide par l'investisseur (et, le cas\necheant, son conseil) avant toute transmission au vendeur.\n",
       "rationale": "Prix maximum = NOI de base (39880.0) / taux de capitalisation cible (6.0%). Valeur de marche mediane (DVF) = 1929685.6. Prix cible = min(valeur de marche, prix maximum), plafonne par le prix demande (650000.0). Plafond en scenario de stress = NOI du scenario 'baisse' / meme taux de capitalisation cible."
     },
     "due_diligence": {
@@ -524,24 +404,17 @@
         },
         {
           "task_type": "question_ouverte",
-          "description": "Prendre en compte ce facteur d'emplacement dans la decision finale.",
+          "description": "Reessayer l'analyse ou traiter cette source manuellement.",
           "status": "ouvert",
           "severity_driver": "moyen",
-          "linked_risk_title": "Risque lie a l'emplacement"
+          "linked_risk_title": "Echec d'analyse automatisee (vision_error)"
         },
         {
           "task_type": "question_ouverte",
-          "description": "Prendre en compte ce facteur d'emplacement dans la decision finale.",
-          "status": "ouvert",
-          "severity_driver": "eleve",
-          "linked_risk_title": "Risque lie a l'emplacement"
-        },
-        {
-          "task_type": "question_ouverte",
-          "description": "Prendre en compte ce facteur d'emplacement dans la decision finale.",
+          "description": "Reessayer l'analyse ou traiter cette source manuellement.",
           "status": "ouvert",
           "severity_driver": "moyen",
-          "linked_risk_title": "Risque lie a l'emplacement"
+          "linked_risk_title": "Echec d'analyse automatisee (location_error)"
         },
         {
           "task_type": "validation_professionnelle",
@@ -565,9 +438,9 @@
           "linked_risk_title": "Operation tres sensible aux hypotheses (faible marge de manoeuvre)"
         }
       ],
-      "unresolved_high_risk_tasks": 1,
-      "decision_ready": false,
-      "audit_trail_note": "8 tache(s) de due diligence generee(s) a partir de 8 risque(s) identifie(s). Chaque tache reste reliee au risque (et donc a la source) qui l'a declenchee via linked_risk_title, formant la piste d'audit de l'annonce a la decision."
+      "unresolved_high_risk_tasks": 0,
+      "decision_ready": true,
+      "audit_trail_note": "7 tache(s) de due diligence generee(s) a partir de 7 risque(s) identifie(s). Chaque tache reste reliee au risque (et donc a la source) qui l'a declenchee via linked_risk_title, formant la piste d'audit de l'annonce a la decision."
     },
     "pending_approval": null,
     "approval_history": []

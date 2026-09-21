@@ -1,152 +1,154 @@
 # DealPilot AI — Case Study
 
-## Utilisateur cible
+*[Version française : case_study.fr.md](case_study.fr.md)*
 
-**Persona** : investisseur immobilier indépendant / gestionnaire d'un petit portefeuille locatif en
-France, qui source lui-même des immeubles de rapport (résidentiel multi-unités) via des sites
-d'annonces, puis analyse manuellement chaque opportunité avant de faire une offre.
+## Target user
 
-**Profil réaliste** : quelques deals étudiés par mois, pas d'équipe d'analystes dédiée, Excel et
-lecture manuelle de documents comme seuls outils. Compétent financièrement mais pas juriste ni
-architecte — dépend de professionnels externes (notaire, diagnostiqueur, agence) pour les points
-spécialisés, mais doit d'abord savoir *lesquels* engager et sur *quoi* leur poser des questions.
+**Persona**: independent real-estate investor / small rental-portfolio manager in France, who
+sources multi-unit residential buildings themselves through listing sites, then manually analyzes
+each opportunity before making an offer.
 
-Deux rôles secondaires couverts par le système, dérivés du même besoin sous-jacent
-(transformer une opportunité floue en dossier structuré) :
-- **Promoteur** : évalue la faisabilité de construction neuve sur un terrain.
-- **Citoyen** : particulier qui veut comprendre ce qu'il peut construire sur son terrain, sans
-  connaissances techniques.
+**Realistic profile**: a handful of deals studied per month, no dedicated team of analysts, Excel
+and manual document reading as the only tools. Financially competent but not a lawyer or architect
+— depends on external professionals (notary, surveyor, agency) for specialized points, but first
+needs to know *which* ones to engage and *what* to ask them.
+
+Two secondary roles covered by the system, derived from the same underlying need (turning a fuzzy
+opportunity into a structured file):
+- **Developer**: evaluates new-construction feasibility on a plot of land.
+- **Citizen**: an individual who wants to understand what they can build on their own land, with no
+  technical background.
 
 ## Job-to-be-done
 
-> "Quand je trouve un immeuble qui m'intéresse, je veux transformer une annonce + des documents
-> disparates + des photos en une décision d'offre défendable, sans y passer ma soirée et sans
-> risquer de rater un problème qu'un document contenait déjà."
+> "When I find a building I'm interested in, I want to turn a listing + scattered documents +
+> photos into a defensible offer decision, without spending my whole evening on it and without
+> risking missing a problem a document already contained."
 
-## Flux de travail manuel actuel (avant le système)
+## Current manual workflow (before the system)
 
-| Étape | Déclencheur | Entrée | Jugement requis | Outil actuel | Validation | Sortie | Exception typique |
+| Step | Trigger | Input | Judgment required | Current tool | Approval | Output | Typical exception |
 |---|---|---|---|---|---|---|---|
-| 1. Repérage | Nouvelle annonce vue | Annonce web | Correspond-elle aux critères ? | Site d'annonces | Aucune | Décision de creuser ou non | Annonce incomplète |
-| 2. Collecte docs | Contact agence/vendeur | PDF, mails | Quels docs sont indispensables ? | Email | Aucune | Dossier de documents | Documents manquants non signalés |
-| 3. Lecture documents | Docs reçus | PDF/scans | Repérer incohérences (loyers, surfaces) | Lecture manuelle | Aucune | Notes éparses | Contradiction non vue faute de comparaison systématique |
-| 4. Analyse photos | Photos reçues | JPEG | Repérer défauts visibles | Œil nu | Aucune | Impression subjective | Sur-confiance sans expertise structurelle |
-| 5. Comparables marché | Besoin de valoriser | Mémoire, sites d'annonces | Quels comparables sont pertinents ? | Recherche manuelle | Aucune | Fourchette de prix approximative | Biais de confirmation |
-| 6. Modèle financier | Prix + loyers connus | Excel | Quelles hypothèses de stress tester ? | Excel personnel | Auto-vérification | Cap rate, cash-flow | Erreur de formule non détectée |
-| 7. Risques | Analyse terminée | Tout ce qui précède | Que faut-il vraiment vérifier avant d'acheter ? | Mémoire/expérience | Aucune | Liste informelle | Risque oublié car non priorisé |
-| 8. Offre | Risques connus | Analyse financière | Quel prix proposer et sous quelles conditions ? | Intuition + Excel | Aucune | Prix verbal ou email | Offre non défendable si négociation |
-| 9. Due diligence | Offre acceptée | Registre de risques | Quoi demander, dans quel ordre ? | Mémoire | Aucune | Checklist ad hoc | Tâche liée à un risque oubliée |
-| 10. Décision finale | Due diligence avancée | Tout le dossier | Acheter ou non ? | Jugement humain | Aucune formelle | Décision d'achat | Décision prise sans revoir tous les points |
+| 1. Sourcing | New listing seen | Web listing | Does it match my criteria? | Listing site | None | Decision to dig further or not | Incomplete listing |
+| 2. Document collection | Contact agency/seller | PDF, emails | Which documents are essential? | Email | None | Document folder | Missing documents not flagged |
+| 3. Document reading | Documents received | PDF/scans | Spot inconsistencies (rents, surfaces) | Manual reading | None | Scattered notes | Contradiction missed for lack of systematic comparison |
+| 4. Photo analysis | Photos received | JPEG | Spot visible defects | Naked eye | None | Subjective impression | Overconfidence without structural expertise |
+| 5. Market comparables | Need to value the property | Memory, listing sites | Which comparables are relevant? | Manual research | None | Rough price range | Confirmation bias |
+| 6. Financial model | Price + rents known | Excel | Which assumptions to stress-test? | Personal Excel sheet | Self-checked | Cap rate, cash flow | Undetected formula error |
+| 7. Risks | Analysis complete | Everything above | What really needs checking before buying? | Memory/experience | None | Informal list | Risk forgotten because not prioritized |
+| 8. Offer | Risks known | Financial analysis | What price to offer, under what conditions? | Intuition + Excel | None | Verbal or email price | Offer not defensible if negotiation happens |
+| 9. Due diligence | Offer accepted | Risk register | What to request, in what order? | Memory | None | Ad hoc checklist | Task tied to a risk forgotten |
+| 10. Final decision | Due diligence advanced | Entire file | Buy or not? | Human judgment | None formal | Purchase decision | Decision made without reviewing every point |
 
-**Temps estimé actuel** : plusieurs heures par dossier (collecte + lecture + modélisation), réparti
-sur plusieurs jours au gré des documents reçus.
+**Current estimated time**: several hours per deal (collection + reading + modeling), spread over
+several days depending on when documents arrive.
 
-## Ce que le système fait (et ne fait pas)
+## What the system does (and does not do)
 
-**Dans le périmètre** : les 10 étapes ci-dessus pour de l'immobilier résidentiel locatif en France,
-plus un module de faisabilité de terrain/construction neuve (promoteur/citoyen) avec vue 360°
-photoréaliste du bâtiment, rendu IA intérieur/jardin, export PDF/Excel, résumé en langage naturel,
-simulateur de contre-offre, comparaison multi-biens.
+**In scope**: the 10 steps above for residential rental real estate in France, plus a land
+feasibility/new-construction module (developer/citizen) with a photorealistic 360° view of the
+building, AI interior/garden rendering, PDF/Excel export, plain-language summary, counter-offer
+simulator, multi-deal comparison.
 
-**Hors périmètre (non-goals explicites)** :
-- Décision d'achat autonome — le système ne décide jamais, il éclaire une décision humaine.
-- Conseil juridique ou financier personnalisé engageant.
-- Certification de sécurité structurelle (l'analyse visuelle signale, ne certifie jamais).
-- Valorisation garantie (les comparables DVF sont indicatifs, jamais une expertise).
-- Négociation automatisée avec le vendeur.
-- Exécution transactionnelle engageante (aucune signature, aucun engagement financier réel).
-- Scraping en direct de portails d'annonces (risque CGU) — utilisation de données synthétiques et
-  de DVF (open data officiel) à la place.
-- Extraction automatique des règles chiffrées d'un règlement PLU (le système donne la zone réelle,
-  pas les seuils numériques qu'elle impose — voir `docs/architecture.md`).
+**Out of scope (explicit non-goals)**:
+- Autonomous purchase decision — the system never decides, it informs a human decision.
+- Binding personalized legal or financial advice.
+- Structural safety certification (visual analysis flags, never certifies).
+- Guaranteed valuation (DVF comparables are indicative, never an expert appraisal).
+- Automated negotiation with the seller.
+- Binding transactional execution (no signature, no real financial commitment).
+- Live scraping of listing portals (ToS risk) — synthetic data and DVF (official open data) used
+  instead.
+- Automatic extraction of numeric rules from a zoning regulation (the system gives the real zoning
+  district, not the numeric thresholds it imposes — see `docs/architecture.md`).
 
-## Métrique de succès
+## Success metric
 
-**Temps jusqu'à décision** : temps manuel/ChatGPT seul (baseline, voir `docs/eval_results.md`) vs
-temps avec DealPilot AI, sur un même dossier synthétique représentatif.
+**Time to decision**: manual/ChatGPT-only time (baseline, see `docs/eval_results.md`) vs time with
+DealPilot AI, on the same representative synthetic deal.
 
-**Métriques secondaires (issues du brief d'origine)** :
-- Exactitude des calculs financiers déterministes vs moteur de référence (calcul à la main) : cible 100%.
-- Rappel sur les documents/risques critiques manquants : cible ≥ 90%.
-- Zéro affirmation non tracée à une source dans les sorties critiques (prix, risques, conformité).
-- Traçabilité à 100% des faits critiques vers une source, une hypothèse ou un calcul (voir le modèle
-  de provenance dans `shared/dealpilot_shared/provenance.py`).
+**Secondary metrics (from the original brief)**:
+- Accuracy of deterministic financial calculations vs a reference engine (hand calculation): target
+  100%.
+- Recall on missing critical documents/risks: target ≥ 90%.
+- Zero unsourced claim in critical outputs (price, risks, compliance).
+- 100% traceability of critical facts to a source, an assumption, or a calculation (see the
+  provenance model in `shared/dealpilot_shared/provenance.py`).
 
-Voir `docs/eval_results.md` pour les résultats mesurés sur les cas synthétiques.
+See `docs/eval_results.md` for results measured on the synthetic cases.
 
-## Architecture et arbitrages majeurs
+## Architecture and major trade-offs
 
-17 microservices FastAPI (dont un frontend Streamlit) plutôt qu'un monolithe — choix assumé dès le
-départ pour isoler chaque capacité métier (extraction documentaire, vision, marché, finance, risque,
-offre, due diligence) : remplacer un fournisseur LLM déprécié, ou faire tomber un service sans
-faire tomber tout le pipeline, ne touche qu'une seule brique. Coût accepté en échange : plus de
-complexité opérationnelle (17 conteneurs, un piège récurrent documenté — chaque service embarque sa
-propre copie du contrat de données partagé et doit être reconstruit après tout changement de schéma).
+17 FastAPI microservices (including a Streamlit frontend) rather than a monolith — a decision made
+from day one to isolate each business capability (document extraction, vision, market, finance,
+risk, offer, due diligence): replacing a deprecated LLM provider, or one service going down,
+touches only a single piece rather than the whole pipeline. Accepted cost in exchange: more
+operational complexity (17 containers, a recurring documented pitfall — every service bundles its
+own copy of the shared data contract and must be rebuilt after any schema change).
 
-Arbitrages notables :
-- **Moteur financier déterministe** (jamais délégué au LLM) — la précision des calculs ne doit rien
-  au hasard d'une génération de texte.
-- **Provenance systématique** : chaque valeur numérique porte ses candidats et leurs sources ; deux
-  sources contradictoires ne sont jamais résolues silencieusement (`contested=true`), elles restent
-  visibles toutes les deux.
-- **Persistance** : `AsyncSqliteSaver` (LangGraph) plutôt qu'un état en mémoire — un redémarrage du
-  conteneur orchestrateur ne perd plus les dossiers en cours.
-- **Visuels — pivot assumé en cours de sprint** : une première version générait une maquette 3D
-  mesurable (Blender/Cycles, animée par phase de construction). Confrontée à la qualité photoréaliste
-  du rendu SDXL déjà utilisé pour l'intérieur, la maquette 3D a été jugée visuellement insuffisante
-  pour l'usage réel ; elle a été remplacée dans le parcours principal par une vue à 360° générée par
-  IA (8 angles, seed partagé pour la cohérence visuelle). Le code Blender reste dans le dépôt mais
-  n'est plus sur le chemin principal — un exemple concret d'arbitrage qualité perçue vs exactitude
-  géométrique, tranché en faveur de la qualité perçue pour ce cas d'usage de vente/présentation.
-- **Fiabilité GPU** : un seul GPU partagé entre deux capacités de génération d'image (SDXL et le
-  pipeline Blender resté dans le dépôt) — verrouillé par un verrou de fichier inter-processus après
-  qu'un test de contention réel a montré un ralentissement mutuel de ~2× sans lui.
+Notable trade-offs:
+- **Deterministic financial engine** (never delegated to the LLM) — calculation accuracy owes
+  nothing to the randomness of text generation.
+- **Systematic provenance**: every numeric value carries its candidates and their sources; two
+  contradictory sources are never silently resolved (`contested=true`), both stay visible with
+  their origin.
+- **Persistence**: `AsyncSqliteSaver` (LangGraph) rather than in-memory state — restarting the
+  orchestrator container no longer loses deals in progress.
+- **Visuals — a pivot made mid-sprint**: an early version generated a measurable 3D massing model
+  (Blender/Cycles, animated by construction phase). Compared side-by-side with the photorealistic
+  SDXL rendering already used for interiors, the 3D model was judged visually insufficient for real
+  use; it was replaced in the main flow by an AI-generated 360° view (8 angles, shared seed for
+  visual consistency). The Blender code stays in the repository but is no longer on the main path —
+  a concrete example of a trade-off between perceived quality and geometric accuracy, resolved in
+  favor of perceived quality for this sales/presentation use case.
+- **GPU reliability**: a single GPU shared between two image-generation capabilities (SDXL and the
+  Blender pipeline that stays in the repo) — locked with a cross-process file lock after a real
+  contention test showed a ~2x mutual slowdown without it.
 
-Détail complet : `docs/architecture.md`.
+Full detail: `docs/architecture.md`.
 
-## Travail délégué à l'IA et jugement humain conservé
+## Work delegated to AI and human judgment retained
 
-Ce projet a été construit avec Claude Code comme assistant de développement. Délégué à l'IA :
-génération de code une fois les choix techniques arrêtés, rédaction de la documentation, conception
-des cas de test adverses, diagnostic de bugs. Conservé côté humain : le choix de l'architecture
-microservices, le choix du marché (France résidentiel locatif), le périmètre complet en 10 étapes
-dès le premier jour, l'arbitrage final entre profondeur technique et documentation, et la décision de
-pivoter la maquette 3D vers la vue 360° après évaluation visuelle comparative. Chaque affirmation de
-l'IA a été vérifiée avant d'être acceptée (exemples concrets, dont un cas où une hypothèse de l'IA
-sur la cause d'un échec de test s'est révélée fausse après reproduction manuelle).
+This project was built with Claude Code as a development assistant. Delegated to AI: code
+generation once technical choices were settled, documentation writing, adversarial test-case
+design, bug diagnosis. Kept on the human side: the choice of microservices architecture, the choice
+of market (French residential rental), the full 10-step scope from day one, the final trade-off
+between technical depth and documentation, and the decision to pivot from the 3D model to the 360°
+view after a comparative visual evaluation. Every AI claim was verified before being accepted
+(concrete examples, including a case where an AI hypothesis about the cause of a test failure
+turned out to be wrong after manual reproduction).
 
-Détail complet, y compris ce qui a été rejeté ou corrigé : `docs/ai_collaboration_note.md`.
+Full detail, including what was rejected or corrected: `docs/ai_collaboration_note.md`.
 
-## Échecs trouvés, changements, résultats et limites
+## Failures found, changes, results, and limitations
 
-**Bug réel trouvé et corrigé** : le test de panne du service `market` a révélé un plantage complet du
-pipeline (HTTP 500) au lieu d'une dégradation gracieuse — corrigé, puis le même filet de sécurité a
-été étendu préventivement à 6 autres points du système qui présentaient la même faiblesse non testée,
-avant qu'un incident réel ne la révèle.
+**Real bug found and fixed**: the `market` service outage test revealed a complete pipeline crash
+(HTTP 500) instead of graceful degradation — fixed, then the same safety net was extended
+preemptively to 6 other points in the system that had the same untested weakness, before a real
+incident could reveal it.
 
-**Bug de cadrage trouvé et corrigé** (vue 360°) : les premières générations photoréalistes du
-bâtiment cadraient en gros plan sur 1-2 fenêtres au lieu de montrer le bâtiment entier. Cause racine :
-le prompt dépassait la limite de 77 tokens du modèle de texte de SDXL (CLIP), et les instructions de
-cadrage large étaient précisément la partie tronquée. Corrigé en réordonnant le prompt pour que les
-instructions critiques arrivent avant la coupure — vérifié visuellement avant/après.
+**Framing bug found and fixed** (360° view): the first photorealistic generations of the building
+framed in tight on 1-2 windows instead of showing the whole building. Root cause: the prompt
+exceeded SDXL's text model (CLIP) 77-token limit, and the wide-framing instructions were precisely
+the part getting truncated. Fixed by reordering the prompt so critical instructions land before the
+cutoff — verified visually before/after.
 
-**Limitation connue, non corrigée** : aucune règle ne détecte un loyer déclaré anormalement élevé ou
-bas par rapport au marché (`risk/app/rules.py`) — un loyer irréaliste produit des indicateurs
-financiers flatteurs sans avertissement. Documenté et reporté au plan d'itération plutôt que masqué.
+**Known limitation, not fixed**: no rule detects a declared rent that is abnormally high or low
+relative to the market (`risk/app/rules.py`) — an unrealistic rent produces flattering financial
+indicators with no warning. Documented and deferred to the iteration plan rather than hidden.
 
-**Limitation structurelle assumée** : aucun essai utilisateur réel chronométré n'a été conduit (accès
-à un vrai investisseur non disponible pendant le sprint) — le gain de temps affiché reste une
-estimation qualitative, explicitement signalée comme telle plutôt que présentée comme une preuve.
+**Assumed structural limitation**: no real timed user trial was conducted (no access to a real
+investor during the sprint) — the reported time savings remain a qualitative estimate, explicitly
+flagged as such rather than presented as proof.
 
-Résultats mesurés complets (29/29 vérifications, 1 limitation documentée) : `docs/eval_results.md`.
+Full measured results (29/29 checks, 1 documented limitation): `docs/eval_results.md`.
 
-## Plan d'itération — 2 prochaines semaines
+## Next two-week iteration plan
 
-Priorités, dans l'ordre : (1) règle de plausibilité loyer/marché — la seule lacune fonctionnelle
-connue et non corrigée ; (2) essai utilisateur réel chronométré avec 2-3 investisseurs pour remplacer
-l'estimation qualitative par une mesure réelle ; (3) base de données partagée interrogeable
-indépendamment du graphe d'exécution ; (4) couverture de tests unitaires pour les 6 services qui en
-sont encore dépourvus (`intake`, `document-intel`, `vision`, `market`, `design-agent`,
-`exterior-render`) ; (5) plan de fiabilité GPU pour un usage multi-utilisateur simultané.
+Priorities, in order: (1) rent-vs-market plausibility rule — the only known, unfixed functional
+gap; (2) real timed user trial with 2-3 investors to replace the qualitative estimate with a real
+measurement; (3) shared database queryable independently of the execution graph; (4) unit test
+coverage for the 6 services that still lack it (`intake`, `document-intel`, `vision`, `market`,
+`design-agent`, `exterior-render`); (5) GPU reliability plan for concurrent multi-user usage.
 
-Détail complet avec métriques d'adoption et de qualité à suivre : `docs/iteration_plan.md`.
+Full detail with adoption/quality metrics to track: `docs/iteration_plan.md`.

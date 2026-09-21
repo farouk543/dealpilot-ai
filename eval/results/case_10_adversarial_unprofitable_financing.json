@@ -1,11 +1,11 @@
 {
   "status": 200,
   "result": {
-    "deal_id": "11e604ce-c6e6-4877-8c88-55a1a6566f5c",
-    "created_at": "2026-09-21T08:47:41.343712Z",
+    "deal_id": "a264400c-12cb-4201-904a-2eb81a716942",
+    "created_at": "2026-09-21T09:45:35.679701Z",
     "current_step": "final_file",
     "property": {
-      "id": "a22c496e-07d7-40b0-bfab-bb3ef70038fe",
+      "id": "45c5d7a1-6acc-41b2-ad65-c3719fcdc5fc",
       "property_type": "Immeuble résidentiel",
       "location": "Lyon",
       "address": null,
@@ -264,7 +264,7 @@
       },
       {
         "field_name": "location_context",
-        "value": "Le secteur étudié autour de l’immeuble résidentiel à Lyon bénéficie d’une très forte densité commerciale (477 commerces) et d’une offre de restauration importante (89 établissements) dans un rayon de 400 m. Cette concentration d’activités crée un environnement très attractif pour des locataires actifs, notamment des jeunes cadres, des couples sans enfants et des étudiants en mobilité, qui recherchent la proximité des services du quotidien et des lieux de vie. La présence de 23 arrêts de transport (bus, métro, tram) assure une bonne desserte, même si elle reste moins dense que l’offre commerciale. En revanche, le nombre d’établissements d’éducation (2) et de santé (5) est relativement faible, ce qui peut limiter l’attrait pour les familles cherchant des écoles ou des services médicaux de proximité. En somme, le quartier se caractérise par une dynamique urbaine forte, propice à une forte demande locative, mais avec quelques réserves pour les ménages à forte exigence en services éducatifs et sanitaires.",
+        "value": "L’immeuble résidentiel situé à Lyon bénéficie d’un environnement très dense et dynamique : 477 commerces et 89 établissements de restauration dans un rayon de 400 m indiquent une forte activité de quartier, propice à une forte demande locative, notamment de la part de jeunes actifs, de couples sans enfants et de professionnels recherchant proximité des services et de la vie urbaine. La présence de 23 points de transport (stations de métro, bus, tram) assure une excellente desserte, ce qui augmente l’attractivité pour des locataires mobiles. Le nombre limité d’établissements d’éducation (2) et de services de santé (5) suggère que le profil des locataires sera davantage orienté vers la vie active que vers les familles avec enfants, qui privilégieraient la proximité d’écoles. En résumé, le quartier se présente comme un pôle de vie citadine très attractif pour la location résidentielle, avec un potentiel de valorisation locative solide.",
         "provenance": {
           "source_type": "external_source",
           "reference": "Analyse LLM sur donnees OSM",
@@ -274,17 +274,17 @@
       },
       {
         "field_name": "location_opportunity:commercial",
-        "value": "Location d’un local au rez‑de‑chaussée pour un commerce de niche (ex. boutique spécialisée, concept store, coworking ou service de proximité) afin de profiter de la forte affluence des 477 commerces et 89 restaurants environnants.",
+        "value": "Création d’un café ou d’un concept de restauration rapide en rez‑de‑chaussée pour capter la forte fréquentation des 89 restaurants déjà présents et répondre à la demande de lieux de pause pour les travailleurs du quartier.",
         "provenance": {
           "source_type": "external_source",
           "reference": "Analyse LLM sur donnees OSM",
           "note": null,
-          "confidence": 0.85
+          "confidence": 0.72
         }
       },
       {
-        "field_name": "location_opportunity:service_educatif",
-        "value": "Création d’une petite structure d’accueil périscolaire ou de cours de soutien (ex. garderie, after‑school) pour répondre à la pénurie d’établissements éducatifs (seulement 2 écoles dans le périmètre).",
+        "field_name": "location_opportunity:commercial",
+        "value": "Installation d’un service de proximité (pressing, laverie ou petite supérette) afin de compléter les 477 commerces existants, qui ne couvrent pas toujours les besoins quotidiens rapides des résidents.",
         "provenance": {
           "source_type": "external_source",
           "reference": "Analyse LLM sur donnees OSM",
@@ -294,7 +294,7 @@
       },
       {
         "field_name": "location_risk",
-        "value": "Offre éducative et sanitaire limitée (2 écoles, 5 établissements de santé) pouvant décourager les familles avec enfants.",
+        "value": "Saturation commerciale : le nombre très élevé de commerces (477) peut rendre difficile la différenciation d’un nouveau commerce et augmenter la concurrence.",
         "provenance": {
           "source_type": "external_source",
           "reference": "Analyse LLM sur donnees OSM",
@@ -304,7 +304,7 @@
       },
       {
         "field_name": "location_risk",
-        "value": "Concurrence commerciale très élevée (477 commerces) pouvant rendre difficile le lancement d’un nouveau commerce sans proposition différenciée.",
+        "value": "Offre éducative limitée (seulement 2 établissements) peut décourager les familles avec enfants de s’installer dans le secteur.",
         "provenance": {
           "source_type": "external_source",
           "reference": "Analyse LLM sur donnees OSM",
@@ -314,7 +314,7 @@
       },
       {
         "field_name": "location_risk",
-        "value": "Densité de transports correcte mais pas exceptionnelle (23 arrêts), ce qui pourrait réduire l’attractivité pour des locataires très dépendants des transports en commun.",
+        "value": "Bruit potentiel lié à la forte densité de restauration et d’activités commerciales, pouvant affecter le confort des locataires.",
         "provenance": {
           "source_type": "external_source",
           "reference": "Analyse LLM sur donnees OSM",
@@ -425,7 +425,7 @@
           "category": "marche",
           "title": "Risque lie a l'emplacement",
           "severity": "moyen",
-          "evidence": "Offre éducative et sanitaire limitée (2 écoles, 5 établissements de santé) pouvant décourager les familles avec enfants.",
+          "evidence": "Saturation commerciale : le nombre très élevé de commerces (477) peut rendre difficile la différenciation d’un nouveau commerce et augmenter la concurrence.",
           "impact": "Peut affecter l'attractivite locative ou la valorisation du bien.",
           "owner": "investisseur",
           "next_action": "Prendre en compte ce facteur d'emplacement dans la decision finale.",
@@ -435,7 +435,7 @@
           "category": "marche",
           "title": "Risque lie a l'emplacement",
           "severity": "moyen",
-          "evidence": "Concurrence commerciale très élevée (477 commerces) pouvant rendre difficile le lancement d’un nouveau commerce sans proposition différenciée.",
+          "evidence": "Offre éducative limitée (seulement 2 établissements) peut décourager les familles avec enfants de s’installer dans le secteur.",
           "impact": "Peut affecter l'attractivite locative ou la valorisation du bien.",
           "owner": "investisseur",
           "next_action": "Prendre en compte ce facteur d'emplacement dans la decision finale.",
@@ -445,7 +445,7 @@
           "category": "marche",
           "title": "Risque lie a l'emplacement",
           "severity": "faible",
-          "evidence": "Densité de transports correcte mais pas exceptionnelle (23 arrêts), ce qui pourrait réduire l’attractivité pour des locataires très dépendants des transports en commun.",
+          "evidence": "Bruit potentiel lié à la forte densité de restauration et d’activités commerciales, pouvant affecter le confort des locataires.",
           "impact": "Peut affecter l'attractivite locative ou la valorisation du bien.",
           "owner": "investisseur",
           "next_action": "Prendre en compte ce facteur d'emplacement dans la decision finale.",
